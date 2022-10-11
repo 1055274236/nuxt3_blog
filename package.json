@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "start": "cross-env PORT=8080 HOST=localhost node .output/server/index.mjs",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@vueuse/core": "^9.2.0",
+    "@vueuse/nuxt": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "nuxt": "3.0.0-rc.11",
+    "vue": "^3.2.39"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "mime-types": "^2.1.35",
+    "mysql2": "^2.3.3",
+    "ohash": "^0.1.5",
+    "sequelize": "^6.21.6"
+  },
+  "config": {
+    "nuxt": {
+      "host": "localhost",
+      "port": "8080"
+    }
+  }
+}
