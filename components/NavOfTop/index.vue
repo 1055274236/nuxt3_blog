@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-11 22:26:49
+ * @LastEditTime: 2022-10-13 00:15:40
 -->
 <template>
   <div>
@@ -69,10 +69,10 @@ const data: DataType = reactive({
   multButtonArr: [
     { link: '/', name: '主页' },
     { link: '/home', name: '博客' },
-    { link: '#', name: '文件' },
   ],
 });
 onMounted(() => {
+  // 有时候刷新不识别，加个语句
   data.isNotTop = y.value > 50;
 });
 

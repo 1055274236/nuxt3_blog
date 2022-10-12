@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-10 16:26:06
+ * @LastEditTime: 2022-10-12 15:49:38
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -14,29 +14,31 @@ const BlogContent = defineConnect(BlogTable.tableName, BlogTable.col);
 export const BlogDatabasesOperate = {
   /**
    * @description: 获取博客列表
-   * @param { keyword, offect, pageSize, tag } params
+   * @param { keyword, offect, pageSize, tag, isContent, isTag, isTitle } params
    * @return { rows, count }
    * @author: Ming
    */
   async getList(params) {
-    const { keyword, offset, pageSize, tag } = params;
+    let { keyword, offset, pageSize, tag, isContent, isTag, isTitle } = params;
+
+    const condition = {} as any;
+
+    if (isContent) {
+      condition.content = { [Op.substring]: keyword };
+    }
+    if (isTag) {
+      condition.tag = { [Op.substring]: keyword || tag };
+    }
+    if (isTitle) {
+      condition.title = { [Op.substring]: keyword };
+    }
+
     const options: FindAndCountOptions<any> = {
-      where: {
-        [Op.or]: {
-          title: {
-            [Op.substring]: keyword,
-          },
-          tag: {
-            [Op.or]: {
-              [Op.substring]: keyword,
-              [Op.substring]: tag,
-            },
-          },
-        },
-      },
+      where: { [Op.or]: condition },
       attributes: ['id', 'cover', 'title', 'tag', 'brief', 'createdAt'],
       offset: offset || 0,
       limit: pageSize || 20,
+      order: [['createdAt', 'desc']],
     };
 
     const { rows, count } = await BlogContent.findAndCountAll({ ...options });

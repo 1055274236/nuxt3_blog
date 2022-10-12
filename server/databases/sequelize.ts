@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 00:39:18
+ * @LastEditTime: 2022-10-12 23:35:56
  */
 import { Sequelize, Options, ModelAttributes } from 'sequelize';
 import config from '~~/main_config';

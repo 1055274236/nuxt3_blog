@@ -2,15 +2,10 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-11 21:11:49
+ * @LastEditTime: 2022-10-12 23:50:55
 -->
 <template>
   <div id="home">
-    <!-- 头 -->
-    <div class="home-header-box">
-      <Header />
-    </div>
-
     <!-- 主页内容 -->
     <div class="home-content">
       <div class="home-content-list">
@@ -54,11 +49,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useTitle, useThrottleFn, useDebounceFn } from '@vueuse/core';
+import { useTitle } from '@vueuse/core';
 import { reactive, onMounted } from 'vue';
 import { BlogRequest } from '~~/api';
 // import { lockScrollTo } from '@/utils';
-import Header from './Header.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -79,66 +73,6 @@ data.blogRequestRows = result.data.rows;
 // const { x, y } = useWindowScroll();
 onMounted(async () => {
   useTitle("Ming' Blog");
-  if (process.client) {
-    const windowHeight = window.innerHeight;
-
-    // let oldValue = window.scrollY;
-    // const scrollTo = lockScrollTo();
-    // const scroll = useThrottleFn((top) => scrollTo(top, 500), 500);
-    // window.addEventListener('scroll', (e) => {
-    //   if (window.scrollY > windowHeight) return;
-    //   else {
-    //     if (window.scrollY - oldValue > 0) {
-    //       scroll(windowHeight);
-    //     } else {
-    //       scroll(0);
-    //     }
-    //   }
-    //   oldValue = window.scrollY;
-    // });
-
-    // const scrollTo = (top: number) => {
-    //   const fun = (e: Event) => {
-    //     e.preventDefault();
-    //   };
-    //   window.addEventListener('wheel', fun, { passive: false });
-    //   window.addEventListener('touchmove', fun, { passive: false }); //passive 参数不能省略，用来兼容ios和android
-    //   window.scrollTo({
-    //     top,
-    //     behavior: 'smooth',
-    //   });
-    //   setTimeout(() => {
-    // window.removeEventListener('wheel', fun);
-    // window.removeEventListener('touchmove', fun);
-    //   }, 500);
-    // };
-    // const scrollTop = useThrottleFn(() => scrollTo(0), 500);
-    // const scrollDown = useThrottleFn(() => scrollTo(windowHeight), 500);
-    // let oldValue = window.scrollY;
-    // window.addEventListener('scroll', (e) => {
-    //   if (window.scrollY <= windowHeight) {
-    //     if (window.scrollY - oldValue > 0) {
-    //       scrollDown();
-    //     } else {
-    //       scrollTop();
-    //     }
-    //   }
-    //   oldValue = window.scrollY;
-    // });
-
-    // 备案
-    window.onwheel = (e) => {
-      if (e.wheelDeltaY < 0 && window.scrollY < windowHeight) {
-        setTimeout(() => {
-          window.scrollTo({ top: windowHeight, behavior: 'smooth' });
-        });
-      } else if (e.wheelDeltaY > 0 && window.scrollY <= windowHeight + 20) {
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      }
-    };
-  }
 });
 
 const itemClick = (id: string) => {
@@ -150,7 +84,7 @@ const itemClick = (id: string) => {
 #home {
   .home-content {
     margin: 16px 0;
-    margin-top: 80px;
+    padding-top: 80px;
     .home-content-list {
       display: flex;
       justify-content: space-around;

@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-11 00:38:35
+ * @LastEditTime: 2022-10-12 23:38:11
 -->
 <template>
   <div id="searchpage">
@@ -14,7 +14,12 @@
             <div class="input-icon">
               <IconSearch />
             </div>
-            <input type="text" v-model="data.keyword" placeholder="关键字" />
+            <input
+              type="text"
+              v-model="data.keyword"
+              placeholder="关键字"
+              @change="search"
+            />
           </div>
 
           <!-- 条件选择 -->
@@ -27,7 +32,20 @@
 
         <!-- 搜索结果 -->
         <div class="search-result">
-          <div class="search-result-empty">暂无结果</div>
+          <div class="search-result-empty" v-if="!data.count">暂无结果</div>
+          <div class="search-result-list" v-else>
+            <div
+              class="list-item"
+              v-for="(item, index) in data.searchResult"
+              :key="index"
+            >
+              <div class="title">{{ item.title }}</div>
+              <div class="brief">{{ item.brief }}</div>
+              <div class="createdAt">
+                {{ dateFormat(item.createdAt, 'YYYY-MM-DD') }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -36,20 +54,53 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue';
+import { BlogRequest } from '~~/api';
+const blogRequest = new BlogRequest();
 
 interface DataType {
   keyword: string;
+  pageNo: number;
+  pageSize: number;
+  count: number;
+  searchResult: any[];
   checkbox: { [key: string]: boolean };
 }
 
 const data: DataType = reactive({
   keyword: '',
+  pageNo: 1,
+  pageSize: 20,
+  count: 0,
+  searchResult: [],
   checkbox: { isContent: false, isTag: false, isTitle: false },
 });
 
 onMounted(() => {});
 
-const getList = async () => {};
+const getList = async () => {
+  const result = await blogRequest.getList({
+    keyword: data.keyword,
+    offect: (data.pageNo - 1) * data.pageSize,
+    pageSize: data.pageSize,
+    isContent: data.checkbox.isContent,
+    isTag: data.checkbox.isTag,
+    isTitle: data.checkbox.isTitle,
+  });
+  data.searchResult = result.data.rows;
+  data.count = result.data.count;
+  console.log(data.count);
+};
+watch(
+  [
+    () => data.checkbox.isContent,
+    () => data.checkbox.isTag,
+    () => data.checkbox.isTitle,
+  ],
+  () => {
+    search();
+  }
+);
+const search = useDebounceFn(() => getList(), 500);
 </script>
 
 <style lang="scss" scoped>
