@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 23:38:11
+ * @LastEditTime: 2022-10-13 17:55:34
 -->
 <template>
   <div id="searchpage">
@@ -88,7 +88,6 @@ const getList = async () => {
   });
   data.searchResult = result.data.rows;
   data.count = result.data.count;
-  console.log(data.count);
 };
 watch(
   [

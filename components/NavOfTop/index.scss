@@ -6,15 +6,23 @@
   right: 0;
   background-color: transparent;
   z-index: 30;
+  opacity: 0.3;
+  display: flex;
+  justify-content: center;
   &:hover,
   &.isNotTop {
+    opacity: 1;
     backdrop-filter: saturate(50%) blur(4px);
     background-color: #ffffff90;
     box-shadow: 0 3px 20px 1px #00000020;
   }
+  &.hide {
+    top: -80px;
+  }
   .navoftop-content {
     margin: 10px;
     width: 100%;
+    max-width: 1300px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -52,7 +60,6 @@
       transition: all 0.5s ease;
       margin: 0 10px;
       width: 40px;
-      height: 40px;
       cursor: pointer;
       color: #666;
       &:hover {

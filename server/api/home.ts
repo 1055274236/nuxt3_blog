@@ -2,13 +2,13 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 01:28:54
+ * @LastEditTime: 2022-10-13 22:51:03
  */
-import { BlogProcess } from '../process';
+import { HomeProcess } from '../process';
 
-const blogProcess = new BlogProcess();
+const homeProcess = new HomeProcess();
 
 export default defineEventHandler(async (event) => {
   const body = await useBody(event);
-  return blogProcess.getDetails(body);
+  return homeProcess.getHomeBase(body);
 });

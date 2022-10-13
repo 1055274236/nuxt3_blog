@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 23:47:13
+ * @LastEditTime: 2022-10-13 18:17:57
 -->
 <template>
   <div class="header-box">
@@ -40,7 +40,7 @@ onMounted(() => {});
 .header-box {
   background-color: gray;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

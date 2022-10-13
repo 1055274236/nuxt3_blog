@@ -2,10 +2,13 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 01:34:03
+ * @LastEditTime: 2022-10-13 23:12:13
  */
 import Process from '../process';
-import { BlogDatabasesOperate } from '~~/server/databases';
+import {
+  BlogDatabasesOperate,
+  OptionsDatabasesOperate,
+} from '~~/server/databases';
 
 export class HomeProcess extends Process {
   constructor() {
@@ -19,8 +22,12 @@ export class HomeProcess extends Process {
     let { pageSize } = params;
     pageSize = pageSize || 20;
 
-    return this.Response.success(
-      await BlogDatabasesOperate.getList({ pageSize })
-    );
+    const listPromise = BlogDatabasesOperate.getList({ pageSize });
+    const optionsPromise = OptionsDatabasesOperate.getValue({
+      key: 'headImg,name,tip',
+    });
+
+    const [list, options] = await Promise.all([listPromise, optionsPromise]);
+    return this.Response.success({ list, options });
   }
 }

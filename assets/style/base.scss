@@ -7,7 +7,7 @@
 html {
   // height: 400vh;
   // width: 100vw;
-  // max-width: 1920px;
+  // max-width: 1700px;
 }
 body {
   background-color: #f4f4f4;
@@ -15,6 +15,10 @@ body {
 
 :root {
   --Blog-color-primary: #00bd6f;
+}
+
+:root {
+  --Blog-shadow: 5px 5px 20px 5px #00000020;
 }
 
 *::-webkit-scrollbar {

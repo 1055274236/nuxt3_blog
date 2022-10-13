@@ -2,11 +2,17 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 00:15:40
+ * @LastEditTime: 2022-10-13 22:33:32
 -->
 <template>
   <div>
-    <div id="navoftop-box" :class="[data.isNotTop ? 'isNotTop' : '']">
+    <div
+      id="navoftop-box"
+      :class="[
+        $route.path !== '/' ? 'isNotTop' : '',
+        data.isHide ? 'hide' : '',
+      ]"
+    >
       <div class="navoftop-content">
         <div :class="['mult-box', data.isClickMult ? 'clickMult' : '']">
           <div class="mult-content">
@@ -34,7 +40,6 @@
         <div class="navoftop-button search">
           <IconSearch @click="() => (data.searchShow = true)" />
         </div>
-        <div class="navoftop-button"></div>
       </div>
     </div>
     <Transition name="slide-fade-top">
@@ -56,6 +61,7 @@ interface DataType {
   isClickMult: boolean;
   searchShow: boolean;
   isNotTop: boolean;
+  isHide: boolean;
   multButtonArr: {
     link: string;
     name: string;
@@ -66,6 +72,7 @@ const data: DataType = reactive({
   isClickMult: false,
   searchShow: false,
   isNotTop: false,
+  isHide: false,
   multButtonArr: [
     { link: '/', name: '主页' },
     { link: '/home', name: '博客' },
@@ -76,8 +83,9 @@ onMounted(() => {
   data.isNotTop = y.value > 50;
 });
 
-watch(y, (newValue) => {
+watch(y, (newValue, oldValue) => {
   data.isNotTop = newValue > 50;
+  data.isHide = newValue - oldValue > 0;
 });
 
 const scrollToTop = () => {

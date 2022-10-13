@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 15:49:38
+ * @LastEditTime: 2022-10-13 16:10:25
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -19,7 +19,28 @@ export const BlogDatabasesOperate = {
    * @author: Ming
    */
   async getList(params) {
-    let { keyword, offset, pageSize, tag, isContent, isTag, isTitle } = params;
+    let {
+      keyword,
+      offset,
+      pageSize,
+      tag,
+      isContent,
+      isTag,
+      isTitle,
+      orderBy,
+      orderRule,
+    } = params;
+
+    // 参数初始化
+    keyword = keyword ?? '';
+    tag = tag ?? '';
+    pageSize = pageSize ?? 20;
+    offset = offset ?? 0;
+    isContent = isContent ?? false;
+    isTag = isTag ?? true;
+    isTitle = isTitle ?? false;
+    orderBy = orderBy ?? 'createdAt';
+    orderRule = orderRule ?? 'desc';
 
     const condition = {} as any;
 
@@ -36,9 +57,9 @@ export const BlogDatabasesOperate = {
     const options: FindAndCountOptions<any> = {
       where: { [Op.or]: condition },
       attributes: ['id', 'cover', 'title', 'tag', 'brief', 'createdAt'],
-      offset: offset || 0,
-      limit: pageSize || 20,
-      order: [['createdAt', 'desc']],
+      offset: offset,
+      limit: pageSize,
+      order: [[orderBy, orderRule]],
     };
 
     const { rows, count } = await BlogContent.findAndCountAll({ ...options });

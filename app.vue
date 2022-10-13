@@ -2,21 +2,19 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-11 19:32:31
+ * @LastEditTime: 2022-10-13 21:48:55
 -->
 <template>
-  <div>
-    <!-- <NuxtWelcome /> -->
-    <!-- <NuxtChild /> -->
-    <NavOfTop />
+  <NavOfTop />
+  <NuxtLayout>
     <NuxtPage :transition="{ name: 'slide-fade-top' }" />
-    <!-- <Loading /> -->
-  </div>
+  </NuxtLayout>
 </template>
 
 <script setup>
 import { loadMagnetic } from '@/utils';
-import { onMounted, provide, nextTick } from 'vue';
+import { onMounted, nextTick } from 'vue';
+const route = useRoute();
 onMounted(() => {
   nextTick(async () => {
     if (process.client) {

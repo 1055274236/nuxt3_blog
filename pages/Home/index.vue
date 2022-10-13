@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 23:50:55
+ * @LastEditTime: 2022-10-13 23:16:21
 -->
 <template>
   <div id="home">
@@ -51,7 +51,7 @@
 <script lang="ts" setup>
 import { useTitle } from '@vueuse/core';
 import { reactive, onMounted } from 'vue';
-import { BlogRequest } from '~~/api';
+import { HomeRequest } from '~~/api';
 // import { lockScrollTo } from '@/utils';
 
 const router = useRouter();
@@ -66,9 +66,10 @@ const data: DataType = reactive({
 });
 
 // 获取首页列表
-const blogRequest = new BlogRequest();
-const result = await blogRequest.getList({ pageSize: 5 });
-data.blogRequestRows = result.data.rows;
+const homeRequest = new HomeRequest();
+const result = (await homeRequest.getList({ pageSize: 5 })).data;
+// data.blogRequestRows = result.data.rows;
+console.log(result);
 
 // const { x, y } = useWindowScroll();
 onMounted(async () => {
@@ -83,18 +84,13 @@ const itemClick = (id: string) => {
 <style lang="scss" scoped>
 #home {
   .home-content {
-    margin: 16px 0;
-    padding-top: 80px;
     .home-content-list {
       display: flex;
-      justify-content: space-around;
       align-items: center;
       flex-direction: column;
-      // flex-wrap: wrap;
-      padding: 0 10vw;
       .content-list-item {
         display: flex;
-        width: 60vw;
+        width: 90%;
         max-width: 1200px;
         min-width: 300px;
         padding: 10px 16px;
@@ -105,7 +101,7 @@ const itemClick = (id: string) => {
         margin: 20px 0;
         cursor: pointer;
 
-        box-shadow: 5px 5px 20px 5px #00000020;
+        box-shadow: var(--Blog-shadow);
         // &:nth-child(odd) {
         //   align-self: flex-start;
         // }
@@ -113,8 +109,8 @@ const itemClick = (id: string) => {
         //   align-self: flex-end;
         // }
         &:hover {
-          width: 62vw;
-          box-shadow: 5px 5px 20px 20px #00000020;
+          width: 92%;
+          box-shadow: 5px 5px 20px 15px #00000020;
           transform: rotateX(10deg);
         }
         .item-left {

@@ -2,6 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 01:27:02
+ * @LastEditTime: 2022-10-13 22:50:11
  */
 export * from './Blog';
+export * from './Home';

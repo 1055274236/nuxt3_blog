@@ -3,11 +3,11 @@
   padding: 16px;
   border-radius: 10px;
   box-shadow: 0 3px 20px 5px #00000030;
+  width: 70vw;
   .search-box {
     .search-content {
       .input-box {
         .input-content {
-          width: 40vw;
           min-width: 200px;
           display: flex;
           align-items: center;
@@ -22,6 +22,7 @@
           }
           input {
             height: 30px;
+            font-size: 20px;
             border: none;
             outline: none;
             flex: 1;
