@@ -2,10 +2,8 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 00:40:33
+ * @LastEditTime: 2022-10-13 23:56:57
  */
-import Path from 'path';
-
 export default {
   dataBases: {
     name: 'blog',
@@ -13,9 +11,5 @@ export default {
     password: 'password',
     port: 3306,
     timezone: '+08:00',
-  },
-  file: {
-    uploadDir: Path.join(process.cwd(), '..', 'uploads'),
-    maxFieldsSize: 10 * 1024 * 1024, // 10M
   },
 };
