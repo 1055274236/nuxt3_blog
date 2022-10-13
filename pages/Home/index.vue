@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 23:16:21
+ * @LastEditTime: 2022-10-13 23:45:31
 -->
 <template>
   <div id="home">
@@ -11,7 +11,7 @@
       <div class="home-content-list">
         <div
           class="content-list-item wow animate__fadeInUp"
-          v-for="(item, index) in data.blogRequestRows"
+          v-for="(item, index) in data.blogList"
           :key="index"
           @click="itemClick(item.id)"
         >
@@ -58,18 +58,20 @@ const router = useRouter();
 const route = useRoute();
 
 interface DataType {
-  blogRequestRows: any[];
+  blogList: any[];
+  blogCount: number;
 }
 
 const data: DataType = reactive({
-  blogRequestRows: [] as any[],
+  blogList: [] as any[],
+  blogCount: 0,
 });
 
 // 获取首页列表
 const homeRequest = new HomeRequest();
 const result = (await homeRequest.getList({ pageSize: 5 })).data;
-// data.blogRequestRows = result.data.rows;
-console.log(result);
+data.blogList = result.list.rows;
+data.blogCount = result.list.count;
 
 // const { x, y } = useWindowScroll();
 onMounted(async () => {
