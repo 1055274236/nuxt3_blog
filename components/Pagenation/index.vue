@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-14 22:13:15
+ * @LastEditTime: 2022-10-15 00:33:12
 -->
 <template>
   <div class="pagenation">
@@ -134,8 +134,8 @@ interface DataType {
 }
 
 const data: DataType = reactive({
-  totalPage: 0,
-  pageNow: 0,
+  totalPage: 1,
+  pageNow: 1,
   leftButton: [],
   centerButton: [],
   rightButton: [],
