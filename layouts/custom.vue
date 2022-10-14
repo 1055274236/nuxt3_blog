@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 21:57:55
+ * @LastEditTime: 2022-10-14 17:03:45
 -->
 <template>
   <div id="app">
@@ -35,7 +35,7 @@ onMounted(() => {});
     display: flex;
     width: 100%;
     max-width: 1300px;
-    margin-top: 80px;
+    margin: 80px 0;
     .left-content {
       flex: 1;
     }
