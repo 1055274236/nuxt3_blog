@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 00:16:03
+ * @LastEditTime: 2022-10-15 00:29:26
  */
 import { DataTypes, ModelAttributes } from 'sequelize';
 
@@ -22,6 +22,7 @@ export const BlogTable = {
     brief: DataTypes.STRING,
     file: DataTypes.TEXT,
     pageview: DataTypes.INTEGER,
+    comment: DataTypes.INTEGER,
     like: DataTypes.INTEGER,
   } as ModelAttributes,
 };

@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 23:12:13
+ * @LastEditTime: 2022-10-15 00:32:01
  */
 import Process from '../process';
 import {
@@ -23,11 +23,36 @@ export class HomeProcess extends Process {
     pageSize = pageSize || 20;
 
     const listPromise = BlogDatabasesOperate.getList({ pageSize });
+    const listByWatchPromist = BlogDatabasesOperate.getList({
+      pageSize: 5,
+      orderBy: 'pageview',
+    });
+    const listByCommentPromist = BlogDatabasesOperate.getList({
+      pageSize: 5,
+      orderBy: 'comment',
+    });
+    const listByLikePromist = BlogDatabasesOperate.getList({
+      pageSize: 5,
+      orderBy: 'like',
+    });
     const optionsPromise = OptionsDatabasesOperate.getValue({
       key: 'headImg,name,tip',
     });
 
-    const [list, options] = await Promise.all([listPromise, optionsPromise]);
-    return this.Response.success({ list, options });
+    const [list, listByWatch, listByComment, listByLike, options] =
+      await Promise.all([
+        listPromise,
+        listByWatchPromist,
+        listByCommentPromist,
+        listByLikePromist,
+        optionsPromise,
+      ]);
+    return this.Response.success({
+      list,
+      options,
+      listByWatch,
+      listByLike,
+      listByComment,
+    });
   }
 }

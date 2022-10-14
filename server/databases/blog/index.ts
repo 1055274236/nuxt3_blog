@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 16:10:25
+ * @LastEditTime: 2022-10-15 00:30:52
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -29,6 +29,7 @@ export const BlogDatabasesOperate = {
       isTitle,
       orderBy,
       orderRule,
+      orderRuleArr,
     } = params;
 
     // 参数初始化
@@ -41,6 +42,7 @@ export const BlogDatabasesOperate = {
     isTitle = isTitle ?? false;
     orderBy = orderBy ?? 'createdAt';
     orderRule = orderRule ?? 'desc';
+    orderRuleArr = orderRuleArr ?? [orderBy, orderRule];
 
     const condition = {} as any;
 
@@ -56,10 +58,10 @@ export const BlogDatabasesOperate = {
 
     const options: FindAndCountOptions<any> = {
       where: { [Op.or]: condition },
-      attributes: ['id', 'cover', 'title', 'tag', 'brief', 'createdAt'],
+      attributes: { exclude: ['updatedAt', 'content'] },
       offset: offset,
       limit: pageSize,
-      order: [[orderBy, orderRule]],
+      order: [orderRuleArr],
     };
 
     const { rows, count } = await BlogContent.findAndCountAll({ ...options });
