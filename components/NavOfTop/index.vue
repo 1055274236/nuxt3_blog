@@ -2,19 +2,16 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 22:33:32
+ * @LastEditTime: 2022-10-14 17:49:14
 -->
 <template>
   <div>
     <div
       id="navoftop-box"
-      :class="[
-        $route.path !== '/' ? 'isNotTop' : '',
-        data.isHide ? 'hide' : '',
-      ]"
+      :class="[{ isNotTop: $route.path !== '/' }, { hide: data.isHide }]"
     >
       <div class="navoftop-content">
-        <div :class="['mult-box', data.isClickMult ? 'clickMult' : '']">
+        <div :class="['mult-box', { clickMult: data.isClickMult }]">
           <div class="mult-content">
             <div
               class="mult-button"
