@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 23:45:31
+ * @LastEditTime: 2022-10-14 22:15:47
 -->
 <template>
   <div id="home">
@@ -10,7 +10,7 @@
     <div class="home-content">
       <div class="home-content-list">
         <div
-          class="content-list-item wow animate__fadeInUp"
+          class="content-list-item"
           v-for="(item, index) in data.blogList"
           :key="index"
           @click="itemClick(item.id)"
@@ -43,6 +43,11 @@
             </div>
           </div>
         </div>
+        <Pagenation
+          v-model="data.pageNow"
+          :total="data.blogCount"
+          :page-size="data.blogPageSize"
+        />
       </div>
     </div>
   </div>
@@ -60,16 +65,21 @@ const route = useRoute();
 interface DataType {
   blogList: any[];
   blogCount: number;
+  pageNow: number;
+  blogPageSize: number;
 }
 
 const data: DataType = reactive({
   blogList: [] as any[],
   blogCount: 0,
+  blogPageSize: 20,
+  pageNow: 1,
 });
 
 // 获取首页列表
 const homeRequest = new HomeRequest();
-const result = (await homeRequest.getList({ pageSize: 5 })).data;
+const result = (await homeRequest.getList({ pageSize: data.blogPageSize }))
+  .data;
 data.blogList = result.list.rows;
 data.blogCount = result.list.count;
 

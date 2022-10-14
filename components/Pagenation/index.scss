@@ -1,0 +1,106 @@
+.pagenation {
+  width: 100%;
+  user-select: none;
+  .pagenation-box {
+    .pagenation-content {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      & > * {
+        margin: 0 10px;
+      }
+      .pagenation-total {
+      }
+      .pagenation-skip {
+        display: flex;
+        align-items: center;
+        & > * {
+          margin: 0 5px;
+        }
+        input {
+          width: 60px;
+        }
+      }
+      .pagenation-main {
+        display: flex;
+        align-items: center;
+
+        & > * {
+          margin: 0 5px;
+        }
+        .pagenation-button {
+          min-width: 20px;
+          padding: 0 5px;
+          height: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #fff;
+          border-radius: 5px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s ease;
+            background-color: transparent;
+          }
+          &:hover {
+            &::before {
+              opacity: 0.3;
+              background-color: gray;
+            }
+          }
+        }
+        .pagenation-forbid {
+          cursor: not-allowed;
+        }
+        .pagenation-item {
+          &.isActive {
+            color: white;
+            background-color: var(--Blog-color-primary);
+          }
+        }
+        .pagenation-left {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            transform: rotate(45deg);
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+          }
+        }
+        .pagenation-button-box {
+          .button-content {
+            display: flex;
+            align-items: center;
+            .pagenation-item {
+              margin: 0 5px;
+            }
+          }
+        }
+        .pagenation-right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            transform: rotate(-45deg);
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+    }
+  }
+}
