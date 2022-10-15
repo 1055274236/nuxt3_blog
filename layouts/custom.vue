@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-14 17:03:45
+ * @LastEditTime: 2022-10-15 00:39:43
 -->
 <template>
   <div id="app">
@@ -10,9 +10,9 @@
       <div class="left-content">
         <slot />
       </div>
-      <div class="right-content">
+      <aside class="right-content">
         <RightTools />
-      </div>
+      </aside>
     </div>
   </div>
 </template>
