@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 00:39:43
+ * @LastEditTime: 2022-10-16 02:28:02
 -->
 <template>
   <div id="app">
@@ -31,6 +31,7 @@ onMounted(() => {});
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 1300px;
   #app-content {
     display: flex;
     width: 100%;
@@ -44,15 +45,19 @@ onMounted(() => {});
     }
   }
 }
-@media screen and (max-width: 992px) {
-  #app-content {
-    align-items: center;
-    flex-direction: column;
-    .left-content {
-      width: 100%;
-    }
-    .right-content {
-      width: 100%;
+@media screen and (max-width: 600px) {
+  #app {
+    min-width: 100%;
+    #app-content {
+      align-items: center;
+      flex-direction: column;
+      .left-content {
+        width: 100%;
+      }
+      .right-content {
+        margin-top: 80px;
+        width: 100%;
+      }
     }
   }
 }

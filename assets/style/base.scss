@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   letter-spacing: 2px;
-  color: var(--Blog-color-word);
   text-decoration: none;
 }
 
@@ -27,4 +26,8 @@ html {
 *::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+a {
+  color: var(--Blog-color-word);
 }

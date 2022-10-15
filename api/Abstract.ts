@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-11 11:52:30
+ * @LastEditTime: 2022-10-16 00:35:54
  */
 
 import { UseFetchOptions } from '#app';
@@ -59,13 +59,13 @@ class Abstract {
     }) as Promise<any>;
   }
 
-  protected getReq(url: string, params: { [key: string]: string }) {
+  protected getReq(url: string, params?: { [key: string]: string }) {
     return this.rerquest(url, 'get', params);
   }
 
   protected postReq(
     url: string,
-    body: { [key: string]: string },
+    body?: { [key: string]: string },
     params?: { [key: string]: string }
   ) {
     return this.rerquest(url, 'post', params, body);
