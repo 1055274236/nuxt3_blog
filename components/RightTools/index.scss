@@ -35,6 +35,9 @@
 
   .list-order {
     width: 100%;
+    background-color: var(--Blog-color-back);
+    margin: 30px 0;
+    border-radius: 20px;
     .order-content {
       .order-header {
         .header-list {

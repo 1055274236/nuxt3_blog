@@ -2,19 +2,20 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 22:57:04
+ * @LastEditTime: 2022-10-16 00:05:54
 -->
 <template>
   <div id="home">
     <!-- 主页内容 -->
     <div class="home-content">
       <div class="home-content-list">
-        <div
+        <NuxtLink
+          :to="`/details/${item.id}`"
           class="content-list-item"
           v-for="(item, index) in data.blogList"
           :key="index"
-          @click="itemClick(item.id)"
         >
+          <!-- @click="itemClick(item.id)" -->
           <div class="item-left">
             <div class="cover" v-if="item.cover">
               <img
@@ -42,7 +43,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </NuxtLink>
         <Pagenation
           v-model="data.pageNow"
           :total="data.blogCount"
@@ -88,9 +89,9 @@ onMounted(async () => {
   useTitle("Ming' Blog");
 });
 
-const itemClick = (id: string) => {
-  router.push({ path: `/details/${id}` });
-};
+// const itemClick = (id: string) => {
+//   router.push({ path: `/details/${id}` });
+// };
 </script>
 
 <style lang="scss" scoped>
