@@ -44,8 +44,10 @@
           width: 100%;
           display: flex;
           justify-content: space-around;
+          border-bottom: 1px black dotted;
           li {
             list-style-type: none;
+            padding: 16px;
           }
         }
       }

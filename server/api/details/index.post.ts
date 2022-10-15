@@ -4,7 +4,7 @@
  * @LastEditors: Ming
  * @LastEditTime: 2022-10-11 01:17:19
  */
-import { BlogProcess } from '../process';
+import { BlogProcess } from '../../process';
 
 const blogProcess = new BlogProcess();
 

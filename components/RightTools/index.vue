@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 22:48:25
+ * @LastEditTime: 2022-10-16 00:19:17
 -->
 <template>
   <div id="right-tools">
@@ -22,8 +22,16 @@
       <div class="order-content">
         <div class="order-header">
           <ul class="header-list">
-            <li>阅读量排序</li>
-            <li>评论数排序</li>
+            <li>喜爱排序</li>
+            <li>评论排序</li>
+          </ul>
+        </div>
+        <div class="list-content">
+          <ul class="content-list">
+            <li class="list-item"></li>
+          </ul>
+          <ul class="content-list">
+            <li class="list-item"></li>
           </ul>
         </div>
       </div>
