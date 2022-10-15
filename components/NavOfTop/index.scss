@@ -13,7 +13,7 @@
   &.isNotTop {
     opacity: 1;
     backdrop-filter: saturate(50%) blur(4px);
-    background-color: #ffffff90;
+    background-color: var(--Blog-color-dim);
     box-shadow: 0 3px 20px 1px #00000020;
   }
   &.hide {

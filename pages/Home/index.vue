@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-14 22:15:47
+ * @LastEditTime: 2022-10-15 22:57:04
 -->
 <template>
   <div id="home">
@@ -108,7 +108,7 @@ const itemClick = (id: string) => {
         padding: 10px 16px;
         // border: 1px dashed black;
         border-radius: 20px;
-        background-color: white;
+        background-color: var(--Blog-color-back);
         transition: all 0.4s ease;
         margin: 20px 0;
         cursor: pointer;

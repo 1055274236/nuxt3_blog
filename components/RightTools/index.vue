@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 22:38:47
+ * @LastEditTime: 2022-10-15 22:48:25
 -->
 <template>
   <div id="right-tools">
@@ -19,7 +19,14 @@
 
     <!-- 博客列表信息排位 -->
     <div class="list-order">
-      <div class="order-content"></div>
+      <div class="order-content">
+        <div class="order-header">
+          <ul class="header-list">
+            <li>阅读量排序</li>
+            <li>评论数排序</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -43,38 +50,5 @@ onMounted(() => {});
 </script>
 
 <style lang="scss" scoped>
-#right-tools {
-  width: 100%;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  .header-box {
-    background-color: #fff;
-    width: 95%;
-    height: 220px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    box-shadow: var(--Blog-shadow);
-
-    .header-content {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      .header-img {
-        img {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-        }
-      }
-      .header-name {
-        margin: 10px 0;
-      }
-    }
-  }
-}
+@use './index.scss';
 </style>
