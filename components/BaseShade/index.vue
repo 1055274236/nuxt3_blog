@@ -2,25 +2,27 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-09-27 15:08:08
+ * @LastEditTime: 2022-10-15 22:43:59
 -->
 <template>
-  <Transition name="fade">
-    <div
-      class="baseshade-back"
-      @click="backClick"
-      v-show="show"
-      ref="baseShadeBack"
-    >
-      <Transition name="slide-fade-top">
-        <div class="baseshade-box" ref="baseShadeBox" v-show="show">
-          <div class="baseshade-content">
-            <slot></slot>
+  <Teleport to="body">
+    <Transition name="fade">
+      <div
+        class="baseshade-back"
+        @click="backClick"
+        v-show="show"
+        ref="baseShadeBack"
+      >
+        <Transition name="slide-fade-top">
+          <div class="baseshade-box" ref="baseShadeBox" v-show="show">
+            <div class="baseshade-content">
+              <slot></slot>
+            </div>
           </div>
-        </div>
-      </Transition>
-    </div>
-  </Transition>
+        </Transition>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <script lang="ts" setup>

@@ -2,10 +2,10 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-14 17:49:14
+ * @LastEditTime: 2022-10-15 22:44:07
 -->
 <template>
-  <div>
+  <header>
     <div
       id="navoftop-box"
       :class="[{ isNotTop: $route.path !== '/' }, { hide: data.isHide }]"
@@ -39,13 +39,15 @@
         </div>
       </div>
     </div>
-    <Transition name="slide-fade-top">
-      <div class="stick" v-show="data.isNotTop" @click="scrollToTop"></div>
-    </Transition>
+    <Teleport to="body">
+      <Transition name="slide-fade-top">
+        <div class="stick" v-show="data.isNotTop" @click="scrollToTop"></div>
+      </Transition>
+    </Teleport>
     <BaseShade v-model:show="data.searchShow" clickBackClose>
       <SearchPage />
     </BaseShade>
-  </div>
+  </header>
 </template>
 
 <script lang="ts" setup>
