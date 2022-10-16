@@ -2,9 +2,9 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 11:36:08
+ * @LastEditTime: 2022-10-16 23:01:56
  */
-import { BlogProcess } from '../process';
+import { BlogProcess } from '~~/server/process';
 
 const blogProcess = new BlogProcess();
 

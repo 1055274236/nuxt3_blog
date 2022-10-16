@@ -4,7 +4,7 @@
  * @LastEditors: Ming
  * @LastEditTime: 2022-10-13 22:51:03
  */
-import { HomeProcess } from '../process';
+import { HomeProcess } from '~~/server/process';
 
 const homeProcess = new HomeProcess();
 
