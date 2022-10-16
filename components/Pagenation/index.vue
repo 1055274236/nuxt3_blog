@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 00:33:12
+ * @LastEditTime: 2022-10-16 22:03:16
 -->
 <template>
   <div class="pagenation">
@@ -14,7 +14,7 @@
         </div>
 
         <!-- 跳转 -->
-        <div class="pagenation-skip">
+        <!-- <div class="pagenation-skip">
           跳转
           <input
             type="text"
@@ -25,7 +25,7 @@
             @keyup="skipPage"
           />
           页
-        </div>
+        </div> -->
 
         <!-- 分页按钮控制 -->
         <div class="pagenation-main">
