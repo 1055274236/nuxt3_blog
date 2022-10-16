@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 00:05:54
+ * @LastEditTime: 2022-10-17 00:02:55
 -->
 <template>
   <div id="home">
@@ -145,6 +145,9 @@ onMounted(async () => {
           .title {
             font-size: 20px;
             font-weight: 600;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
           }
           .brief {
             line-height: 20px;

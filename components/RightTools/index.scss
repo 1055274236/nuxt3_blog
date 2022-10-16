@@ -48,12 +48,15 @@
           justify-content: space-around;
           align-items: center;
           .select {
-            border-bottom: 1px solid var(--Blog-color-primary);
+            color: var(--Blog-color-primary);
+            border-bottom: 2px solid var(--Blog-color-primary);
           }
           li {
+            transition: color 0.3s ease;
             list-style-type: none;
             cursor: pointer;
-            padding: 16px;
+            padding: 5px;
+            margin: 10px;
             position: relative;
             &:hover {
               color: var(--Blog-color-primary);
@@ -124,36 +127,30 @@
               .title {
                 font-size: 20px;
                 font-weight: 600;
-              }
-              .brief {
-                line-height: 20px;
-                min-height: 60px;
-                text-overflow: -o-ellipsis-lastline;
-                overflow: hidden;
+                white-space: nowrap;
                 text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                line-clamp: 3;
-                -webkit-box-orient: vertical;
-                user-select: none;
+                overflow: hidden;
               }
-              .item-tag {
+              .item-right-footer {
                 display: flex;
-                // justify-content: center;
+                justify-content: flex-end;
                 align-items: center;
-                user-select: none;
                 opacity: 0.5;
-                .tag {
-                  padding: 5px 10px;
-                  border-radius: 50px;
-                  color: black;
-                }
-              }
-              .createdAt {
-                text-align: right;
-                user-select: none;
                 font-size: 10px;
-                opacity: 0.5;
+
+                svg {
+                  width: 20px;
+                  height: 20px;
+                }
+                .favorites {
+                  color: red;
+                }
+                .text {
+                  margin: 0 5px 0 2px;
+                }
+                .createdAt {
+                  user-select: none;
+                }
               }
             }
           }

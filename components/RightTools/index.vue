@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 02:35:03
+ * @LastEditTime: 2022-10-17 00:03:19
 -->
 <template>
   <div id="right-tools">
@@ -56,6 +56,8 @@
               <div class="item-right">
                 <div class="title">{{ item.title }}</div>
                 <div class="item-right-footer">
+                  <IconFavorites fill class="favorites" />
+                  <div class="text">{{ item.like }}</div>
                   <div class="createdAt">
                     {{ dateFormat(item.createdAt, 'YYYY-MM-DD') }}
                   </div>
@@ -82,6 +84,8 @@
               <div class="item-right">
                 <div class="title">{{ item.title }}</div>
                 <div class="item-right-footer">
+                  <IconComment fill class="" />
+                  <div class="text">{{ item.comment }}</div>
                   <div class="createdAt">
                     {{ dateFormat(item.createdAt, 'YYYY-MM-DD') }}
                   </div>
