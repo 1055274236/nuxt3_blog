@@ -2,13 +2,14 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 21:48:55
+ * @LastEditTime: 2022-10-16 23:44:34
 -->
 <template>
   <NavOfTop />
   <NuxtLayout>
     <NuxtPage :transition="{ name: 'slide-fade-top' }" />
   </NuxtLayout>
+  <Footer />
 </template>
 
 <script setup>
