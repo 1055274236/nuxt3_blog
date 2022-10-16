@@ -2,13 +2,12 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 23:01:56
+ * @LastEditTime: 2022-10-16 23:42:13
  */
-import { BlogProcess } from '~~/server/process';
-
-const blogProcess = new BlogProcess();
+import { BlogDatabasesOperate } from '~~/server/databases';
+import { Response } from '~~/server/utils';
 
 export default defineEventHandler(async (event) => {
-  const body = await useBody(event);
-  return blogProcess.getList(body);
+  const params = await useBody(event);
+  return Response.success(await BlogDatabasesOperate.getList(params));
 });

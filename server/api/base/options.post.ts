@@ -2,17 +2,14 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 22:27:03
+ * @LastEditTime: 2022-10-16 23:39:41
  */
-import { BaseProcess } from '~~/server/process';
-
-const baseProcess = new BaseProcess();
+import { OptionsDatabasesOperate } from '~~/server/databases';
+import { Response } from '~~/server/utils';
 
 export default defineEventHandler(async (event) => {
-  const params = await useBody(event);
-  console.log('bad');
-
-  console.log(event);
-
-  return baseProcess.getOptions(params);
+  let { key } = await useBody(event);
+  return Response.success({
+    options: await OptionsDatabasesOperate.getValue(key),
+  });
 });
