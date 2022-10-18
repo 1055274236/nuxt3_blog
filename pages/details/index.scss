@@ -51,5 +51,21 @@
     .context {
       padding: 16px;
     }
+
+    .comment {
+      h2 {
+        position: relative;
+        padding-left: 20px;
+        &::before {
+          content: '';
+          width: 3px;
+          border-radius: 10px;
+          height: 100%;
+          background-color: var(--Blog-color-primary);
+          position: absolute;
+          left: 0;
+        }
+      }
+    }
   }
 }

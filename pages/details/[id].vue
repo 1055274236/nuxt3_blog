@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-18 00:52:36
+ * @LastEditTime: 2022-10-19 00:04:57
 -->
 <template>
   <div id="details">
@@ -52,6 +52,44 @@
       <div class="context">
         <div class="context-content" v-html="data.details.content"></div>
       </div>
+
+      <div class="comment">
+        <!-- 评论 -->
+        <h2>评论</h2>
+        <div class="comment-content">
+          <div class="comment-list">
+            <div
+              class="list-item"
+              v-for="(item, index) in data.comment"
+              :key="index"
+            >
+              <div class="name">
+                {{ item.name }}
+              </div>
+              <div class="info">
+                {{ item.brower }}
+              </div>
+              <div class="content" v-html="item.content"></div>
+              <!-- 回复 -->
+              <div class="children">
+                <div
+                  class="list-item"
+                  v-for="(citem, cindex) in item.children"
+                  :key="cindex"
+                >
+                  <div class="name">
+                    {{ citem.name }}
+                  </div>
+                  <div class="info">
+                    {{ citem.brower }}
+                  </div>
+                  <div class="content" v-html="citem.content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -65,9 +103,13 @@ const blogRequest = new BlogRequest();
 const id = route.params.id;
 const data = reactive({
   details: {} as any,
+  commentCount: 0,
+  comment: [],
 });
 const result = await blogRequest.getDetails({ id });
 data.details = result.data.details;
+data.commentCount = result.data.comment.count;
+data.comment = result.data.comment.rows;
 
 onMounted(() => {
   useTitle(data.details.title);

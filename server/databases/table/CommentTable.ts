@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-12 00:05:20
+ * @LastEditTime: 2022-10-18 23:31:44
  */
 import { DataTypes, ModelAttributes } from 'sequelize';
 
@@ -15,6 +15,7 @@ export const CommentTable = {
       primaryKey: true,
       type: DataTypes.UUID,
     },
+    name: DataTypes.STRING,
     content: DataTypes.TEXT,
     blog_id: DataTypes.UUID,
     parent_id: DataTypes.UUID,
