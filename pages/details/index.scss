@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  min-height: 100vh;
   .details-content {
     width: calc(95% - 20px);
     background-color: var(--Blog-color-back);
@@ -50,20 +49,30 @@
 
     .context {
       padding: 16px;
+      min-height: 80vh;
     }
 
     .comment {
-      h2 {
-        position: relative;
-        padding-left: 20px;
-        &::before {
-          content: '';
-          width: 3px;
-          border-radius: 10px;
-          height: 100%;
-          background-color: var(--Blog-color-primary);
-          position: absolute;
-          left: 0;
+      .comment-header {
+        display: flex;
+        align-items: flex-end;
+        h2 {
+          position: relative;
+          padding-left: 20px;
+          &::before {
+            content: '';
+            width: 3px;
+            border-radius: 10px;
+            height: 100%;
+            background-color: var(--Blog-color-primary);
+            position: absolute;
+            left: 0;
+          }
+        }
+        .comment-count {
+          margin-left: 10px;
+          font-size: 12px;
+          opacity: 0.8;
         }
       }
     }

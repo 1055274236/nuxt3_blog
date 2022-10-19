@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-18 22:43:14
+ * @LastEditTime: 2022-10-19 23:49:42
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -10,6 +10,11 @@ import { defineConnect } from '../sequelize';
 import { CommentTable } from '../table';
 
 const CommentContent = defineConnect(CommentTable.tableName, CommentTable.col);
+CommentContent.belongsTo(CommentContent, {
+  as: 'parent',
+  targetKey: 'id',
+  foreignKey: 'parent_id',
+});
 
 export const CommentDatabasesOperate = {
   async getCommentById(params?) {
@@ -36,16 +41,28 @@ export const CommentDatabasesOperate = {
     // 获取根评论
     const rootComment = await CommentContent.findAndCountAll({ ...options });
     // 获取评论的回复评论
-    rootComment.rows.forEach(async (item: any) => {
-      item.children = await CommentContent.findAndCountAll({
-        where: {
-          blog_id: item.blog_id,
-          root_parent_id: item.id,
-        },
-        order: [['createdAt', 'asc']],
-      });
-    });
+    let commentList: any = rootComment;
 
-    return rootComment;
+    commentList.rows = await Promise.all(
+      rootComment.rows.map(async (item) => {
+        let r = item.toJSON();
+
+        const blogId = r.blog_id;
+        const id = r.id;
+
+        r.children = await CommentContent.findAndCountAll({
+          where: {
+            blog_id: blogId,
+            root_parent_id: id,
+          },
+          order: [['createdAt', 'asc']],
+          include: { model: CommentContent, as: 'parent' },
+        });
+
+        return r;
+      })
+    );
+
+    return commentList;
   },
 };
