@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-19 00:04:57
+ * @LastEditTime: 2022-10-20 01:09:25
 -->
 <template>
   <div id="details">
@@ -52,42 +52,69 @@
       <div class="context">
         <div class="context-content" v-html="data.details.content"></div>
       </div>
-
-      <div class="comment">
-        <!-- 评论 -->
+    </div>
+    <div class="comment-box">
+      <!-- 评论 -->
+      <div class="comment-header">
         <h2>评论</h2>
-        <div class="comment-content">
-          <div class="comment-list">
-            <div
-              class="list-item"
-              v-for="(item, index) in data.comment"
-              :key="index"
-            >
-              <div class="name">
-                {{ item.name }}
+        <div class="comment-count">共有 {{ data.commentCount }} 条评论</div>
+      </div>
+      <div class="comment-content">
+        <div class="comment-empty" v-if="data.commentCount === 0">暂无评论</div>
+        <div class="comment-list" v-else>
+          <div
+            class="list-item"
+            v-for="(item, index) in data.comment"
+            :key="index"
+          >
+            <div class="name">
+              {{ item.name }}
+            </div>
+            <div class="info">
+              <div class="browser">
+                <IconNet />
+                {{ item.browser }}
               </div>
-              <div class="info">
-                {{ item.brower }}
+              <div class="createdAt">
+                <IconClock />
+                {{ dateFormat(item.createdAt) }}
               </div>
-              <div class="content" v-html="item.content"></div>
-              <!-- 回复 -->
-              <div class="children">
-                <div
-                  class="list-item"
-                  v-for="(citem, cindex) in item.children"
-                  :key="cindex"
-                >
-                  <div class="name">
-                    {{ citem.name }}
-                  </div>
-                  <div class="info">
-                    {{ citem.brower }}
-                  </div>
-                  <div class="content" v-html="citem.content"></div>
+            </div>
+            <div class="content" v-html="item.content"></div>
+            <!-- 回复 -->
+            <div class="children">
+              <div
+                class="list-item"
+                v-for="(citem, cindex) in item.children.rows"
+                :key="cindex"
+              >
+                <div class="name">
+                  {{ citem.name }}
                 </div>
+                <div class="info">
+                  <div class="browser">
+                    <IconNet />
+                    {{ citem.browser }}
+                  </div>
+                  <div class="createdAt">
+                    <IconClock />
+                    {{ dateFormat(citem.createdAt) }}
+                  </div>
+                </div>
+                <div class="parent" v-if="citem.parent">
+                  <div class="name">{{ citem.parent.name }}</div>
+                  <div class="content" v-html="citem.parent.content"></div>
+                </div>
+                <div class="content" v-html="citem.content"></div>
               </div>
             </div>
           </div>
+          <Pagenation
+            v-model="data.pageNo"
+            :total="data.commentCount"
+            :page-size="data.pageSize"
+            @change="getComment"
+          />
         </div>
       </div>
     </div>
@@ -97,23 +124,41 @@
 <script lang="ts" setup>
 import { useTitle } from '@vueuse/core';
 import { reactive, onMounted } from 'vue';
-import { BlogRequest } from '~~/api';
+import { BlogRequest, CommentRequest } from '~~/api';
 const route = useRoute();
 const blogRequest = new BlogRequest();
+const commentRequest = new CommentRequest();
 const id = route.params.id;
 const data = reactive({
   details: {} as any,
   commentCount: 0,
   comment: [],
+
+  pageSize: 20,
+  pageNo: 1,
 });
-const result = await blogRequest.getDetails({ id });
-data.details = result.data.details;
-data.commentCount = result.data.comment.count;
-data.comment = result.data.comment.rows;
+const [details, comment] = await Promise.all([
+  blogRequest.getDetails({ id }),
+  commentRequest.getByID({ id }),
+]);
+data.details = details.data.details;
+data.commentCount = comment.data.count;
+data.comment = comment.data.rows;
+console.log(comment);
 
 onMounted(() => {
   useTitle(data.details.title);
 });
+
+const getComment = async () => {
+  const comment = await commentRequest.getByID({
+    id,
+    offset: (data.pageNo - 1) * data.pageSize,
+    pageSize: data.pageSize,
+  });
+  data.commentCount = comment.data.count;
+  data.comment = comment.data.rows;
+};
 </script>
 
 <style lang="scss" scoped>
