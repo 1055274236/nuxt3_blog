@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 22:03:16
+ * @LastEditTime: 2022-10-20 00:54:42
 -->
 <template>
   <div class="pagenation">
@@ -203,9 +203,10 @@ const skipPage = (e: KeyboardEvent) => {
 };
 
 const changePage = (newValue: number) => {
+  let oldValue = data.pageNow;
   data.pageNow = newValue;
-  emits('change', newValue, props.modelValue);
   emits('update:modelValue', newValue);
+  emits('change', newValue, oldValue);
 };
 </script>
 
