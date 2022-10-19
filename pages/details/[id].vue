@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-20 01:09:25
+ * @LastEditTime: 2022-10-20 01:18:28
 -->
 <template>
   <div id="details">
@@ -144,7 +144,6 @@ const [details, comment] = await Promise.all([
 data.details = details.data.details;
 data.commentCount = comment.data.count;
 data.comment = comment.data.rows;
-console.log(comment);
 
 onMounted(() => {
   useTitle(data.details.title);
