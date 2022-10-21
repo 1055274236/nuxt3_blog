@@ -20,7 +20,8 @@
     "mime-types": "^2.1.35",
     "mysql2": "^2.3.3",
     "ohash": "^0.1.5",
-    "sequelize": "^6.21.6"
+    "sequelize": "^6.21.6",
+    "ua-parser-js": "^1.0.32"
   },
   "config": {
     "nuxt": {

@@ -2,7 +2,6 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-19 00:01:26
+ * @LastEditTime: 2022-10-22 02:40:24
  */
-export * from './deviceType';
 export * from './response';

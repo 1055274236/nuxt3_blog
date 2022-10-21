@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-19 23:49:42
+ * @LastEditTime: 2022-10-21 23:19:55
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -17,6 +17,10 @@ CommentContent.belongsTo(CommentContent, {
 });
 
 export const CommentDatabasesOperate = {
+  /**
+   * @description: 根据 Id 获取评论
+   * @author: Ming
+   */
   async getCommentById(params?) {
     let { id, offset, pageSize, orderBy, orderRule, orderRuleArr } = params;
 
@@ -64,5 +68,24 @@ export const CommentDatabasesOperate = {
     );
 
     return commentList;
+  },
+
+  /**
+   * @description: 根据博客 Id 增加评论
+   * @author: Ming
+   */
+  async addCommentById(params?) {
+    let { name, blog_id, content, parent_id, root_parent_id, browser } = params;
+
+    const incParams = {
+      name,
+      blog_id,
+      content,
+      parent_id,
+      root_parent_id,
+      browser,
+    };
+
+    CommentContent.create(incParams);
   },
 };
