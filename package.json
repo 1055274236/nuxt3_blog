@@ -5,7 +5,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "start": "cross-env PORT=8080 HOST=localhost node .output/server/index.mjs",
+    "start": "cross-env PORT=50009 HOST=localhost node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
