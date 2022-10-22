@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-21 23:19:55
+ * @LastEditTime: 2022-10-22 23:51:08
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -75,7 +75,20 @@ export const CommentDatabasesOperate = {
    * @author: Ming
    */
   async addCommentById(params?) {
-    let { name, blog_id, content, parent_id, root_parent_id, browser } = params;
+    let {
+      name,
+      blog_id,
+      content,
+      parent_id,
+      root_parent_id,
+      browser,
+      device,
+      engine,
+      os,
+      cpu,
+      ip,
+      address,
+    } = params;
 
     const incParams = {
       name,
@@ -84,8 +97,15 @@ export const CommentDatabasesOperate = {
       parent_id,
       root_parent_id,
       browser,
+      device,
+      engine,
+      os,
+      cpu,
+      ip,
+      address,
     };
 
-    CommentContent.create(incParams);
+    await CommentContent.create(incParams);
+    return 'success';
   },
 };

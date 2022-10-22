@@ -12,6 +12,7 @@ specifiers:
   sequelize: ^6.21.6
   ua-parser-js: ^1.0.32
   vue: ^3.2.39
+  xz-ipnet: ^1.0.2
 
 dependencies:
   animate.css: registry.npmmirror.com/animate.css/4.1.1
@@ -20,6 +21,7 @@ dependencies:
   ohash: registry.npmmirror.com/ohash/0.1.5
   sequelize: registry.npmmirror.com/sequelize/6.21.6_mysql2@2.3.3
   ua-parser-js: registry.npmmirror.com/ua-parser-js/1.0.32
+  xz-ipnet: registry.npmmirror.com/xz-ipnet/1.0.2
 
 devDependencies:
   '@vueuse/core': registry.npmmirror.com/@vueuse/core/9.2.0_vue@3.2.39
@@ -1616,6 +1618,12 @@ packages:
       base64-js: registry.npmmirror.com/base64-js/1.5.1
       ieee754: registry.npmmirror.com/ieee754/1.2.1
     dev: true
+
+  registry.npmmirror.com/bufferpack/0.0.6:
+    resolution: {integrity: sha512-MTWvLHElqczrIVhge9qHtqgNigJFyh0+tCDId5yCbFAfuekHWIG+uAgvoHVflwrDPuY/e47JE1ki5qcM7w4uLg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bufferpack/-/bufferpack-0.0.6.tgz}
+    name: bufferpack
+    version: 0.0.6
+    dev: false
 
   registry.npmmirror.com/builtin-modules/3.3.0:
     resolution: {integrity: sha512-zhaCDicdLuWN5UbN5IMnFqNMhNfo919sH85y2/ea+5Yg9TsTkeZxpL+JLbp6cgYFS4sRLp3YV4S6yDuqVWHYOw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/builtin-modules/-/builtin-modules-3.3.0.tgz}
@@ -3255,6 +3263,12 @@ packages:
     version: 5.0.0
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
+
+  registry.npmmirror.com/ip/1.1.8:
+    resolution: {integrity: sha512-PuExPYUiu6qMBQb4l06ecm6T6ujzhmh+MeJcW9wa89PoAz5pvd4zPgN5WJV104mb6S2T1AwNIAaB70JNrLQWhg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ip/-/ip-1.1.8.tgz}
+    name: ip
+    version: 1.1.8
+    dev: false
 
   registry.npmmirror.com/is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/is-binary-path/-/is-binary-path-2.1.0.tgz}
@@ -6364,6 +6378,15 @@ packages:
     dependencies:
       cuint: registry.npmmirror.com/cuint/0.2.2
     dev: true
+
+  registry.npmmirror.com/xz-ipnet/1.0.2:
+    resolution: {integrity: sha512-JDerwJPioHm8XKGgPk2CG+0KzlsI0p+0USneZkBhaXKJSYUFaqbT3xMVcA69oiTVu8eGqMHtASrJLzQ2ucG2mA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/xz-ipnet/-/xz-ipnet-1.0.2.tgz}
+    name: xz-ipnet
+    version: 1.0.2
+    dependencies:
+      bufferpack: registry.npmmirror.com/bufferpack/0.0.6
+      ip: registry.npmmirror.com/ip/1.1.8
+    dev: false
 
   registry.npmmirror.com/y18n/5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/y18n/-/y18n-5.0.8.tgz}

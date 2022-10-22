@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-18 23:31:44
+ * @LastEditTime: 2022-10-22 23:45:32
  */
 import { DataTypes, ModelAttributes } from 'sequelize';
 
@@ -22,6 +22,10 @@ export const CommentTable = {
     root_parent_id: DataTypes.UUID,
     device: DataTypes.STRING,
     browser: DataTypes.STRING,
+    engine: DataTypes.STRING,
+    os: DataTypes.STRING,
+    cpu: DataTypes.STRING,
     ip: DataTypes.STRING,
+    address: DataTypes.STRING,
   } as ModelAttributes,
 };
