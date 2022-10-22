@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-22 23:48:43
+ * @LastEditTime: 2022-10-23 03:31:19
  */
 import { CommentDatabasesOperate } from '~~/server/databases';
 import { Response } from '~~/server/utils';
@@ -22,15 +22,14 @@ export default defineEventHandler(async (event) => {
       ipNet = ipParse.find(ip) as string[];
     // 添加属性
     let p = {
-      browser: userAgent.getBrowser(),
-      device: userAgent.getDevice(),
-      engine: userAgent.getEngine(),
-      os: userAgent.getOS(),
-      cpu: userAgent.getCPU(),
+      browser: userAgent.getBrowser()?.name ?? '',
+      device: userAgent.getDevice()?.vendor ?? '',
+      engine: userAgent.getEngine()?.name ?? '',
+      os: userAgent.getOS()?.name ?? '',
+      cpu: userAgent.getCPU()?.architecture ?? '',
       ip,
-      address: ipNet.slice(0, 2).join(''),
+      address: ipNet?.slice(0, 2)?.join('') ?? '',
     };
-
     return Response.success(
       await CommentDatabasesOperate.addCommentById({ ...params, ...p })
     );

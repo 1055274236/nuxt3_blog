@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 00:40:08
+ * @LastEditTime: 2022-10-23 03:40:22
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -34,7 +34,7 @@ export const CommentDatabasesOperate = {
     const options: FindAndCountOptions = {
       where: {
         blog_id: id,
-        parent_id: {
+        root_parent_id: {
           [Op.is]: null,
         },
       },

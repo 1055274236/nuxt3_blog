@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-20 01:18:28
+ * @LastEditTime: 2022-10-23 03:38:00
 -->
 <template>
   <div id="details">
@@ -53,6 +53,7 @@
         <div class="context-content" v-html="data.details.content"></div>
       </div>
     </div>
+
     <div class="comment-box">
       <!-- 评论 -->
       <div class="comment-header">
@@ -67,20 +68,26 @@
             v-for="(item, index) in data.comment"
             :key="index"
           >
-            <div class="name">
-              {{ item.name }}
-            </div>
-            <div class="info">
-              <div class="browser">
-                <IconNet />
-                {{ item.browser }}
+            <div class="root-comment">
+              <div class="name" @click="changeReply(item)">
+                {{ item.name }}
               </div>
-              <div class="createdAt">
-                <IconClock />
-                {{ dateFormat(item.createdAt) }}
+              <div class="info" v-if="item.browser">
+                <div class="browser">
+                  <IconNet />
+                  {{ item.browser }}
+                </div>
+                <div class="map" v-if="item.address">
+                  <IconMap />
+                  {{ item.address }}
+                </div>
+                <div class="createdAt">
+                  <IconClock />
+                  {{ dateFormat(item.createdAt) }}
+                </div>
               </div>
+              <div class="content" v-html="item.content"></div>
             </div>
-            <div class="content" v-html="item.content"></div>
             <!-- 回复 -->
             <div class="children">
               <div
@@ -88,13 +95,17 @@
                 v-for="(citem, cindex) in item.children.rows"
                 :key="cindex"
               >
-                <div class="name">
+                <div class="name" @click="changeReply(citem)">
                   {{ citem.name }}
                 </div>
                 <div class="info">
-                  <div class="browser">
+                  <div class="browser" v-if="citem.browser">
                     <IconNet />
                     {{ citem.browser }}
+                  </div>
+                  <div class="map" v-if="citem.address">
+                    <IconMap />
+                    {{ citem.address }}
                   </div>
                   <div class="createdAt">
                     <IconClock />
@@ -117,6 +128,54 @@
           />
         </div>
       </div>
+
+      <div class="submit-comment">
+        <!-- 添加评论 -->
+        <div class="comment-header">
+          <h2>添加评论</h2>
+        </div>
+
+        <!-- 表单 -->
+        <form action="" class="form" @submit.prevent="submit">
+          <div class="reply" v-show="data.replyName">
+            <div class="form-label">回复：</div>
+            <div class="reply-name">{{ data.replyName }}</div>
+            <div class="remove-reply" @click="deleteReply"></div>
+          </div>
+
+          <div class="form-item">
+            <div class="form-label">名称:</div>
+            <input
+              type="text"
+              name="name"
+              placeholder="名称"
+              v-model="data.submitCommentParams.name"
+            />
+          </div>
+          <div class="form-item">
+            <div class="form-label">邮箱:</div>
+            <input
+              type="text"
+              name="email"
+              placeholder="邮箱（选填）"
+              v-model="data.submitCommentParams.email"
+            />
+          </div>
+          <div class="form-item">
+            <div class="form-label">正文:</div>
+            <textarea
+              name="content"
+              cols="30"
+              rows="10"
+              placeholder="正文"
+              v-model="data.submitCommentParams.content"
+            ></textarea>
+          </div>
+          <div class="options">
+            <button type="submit">提交</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -134,8 +193,17 @@ const data = reactive({
   commentCount: 0,
   comment: [],
 
-  pageSize: 20,
+  pageSize: 100,
   pageNo: 1,
+  replyName: '',
+  submitCommentParams: {
+    blog_id: id,
+    name: '',
+    email: '',
+    content: '',
+    root_parent_id: null,
+    parent_id: null,
+  },
 });
 const [details, comment] = await Promise.all([
   blogRequest.getDetails({ id }),
@@ -158,6 +226,39 @@ const getComment = async () => {
   data.commentCount = comment.data.count;
   data.comment = comment.data.rows;
 };
+
+const changeReply = (item) => {
+  if (item.root_parent_id !== null)
+    data.submitCommentParams.parent_id = item.id;
+  data.submitCommentParams.root_parent_id = item.root_parent_id || item.id;
+  data.replyName = item.name;
+};
+const deleteReply = () => {
+  data.submitCommentParams.parent_id = null;
+  data.submitCommentParams.root_parent_id = null;
+  data.replyName = '';
+};
+
+const submitComment = async () => {
+  if (data.submitCommentParams.content && data.submitCommentParams.name) {
+    const result = await commentRequest.addByBlogId({
+      ...data.submitCommentParams,
+    });
+    if (result.errcode === 200) {
+      data.replyName = '';
+      data.submitCommentParams = {
+        blog_id: id,
+        name: '',
+        email: '',
+        content: '',
+        root_parent_id: null,
+        parent_id: null,
+      };
+      getComment();
+    }
+  }
+};
+const submit = useThrottleFn(() => submitComment(), 1000);
 </script>
 
 <style lang="scss" scoped>
