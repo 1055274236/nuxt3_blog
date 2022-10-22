@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 00:35:54
+ * @LastEditTime: 2022-10-23 03:45:19
  */
 
 import { UseFetchOptions } from '#app';
@@ -31,7 +31,12 @@ class Abstract {
       onResponseError,
     };
     // 不设置key，始终拿到的都是第一个请求的值，参数一样则不会进行第二次请求
-    const key = hash(JSON.stringify(options)) + '_' + url;
+    const key =
+      hash(JSON.stringify(options)) +
+      '_' +
+      url +
+      '_' +
+      new Date().getTime() / 10000;
     // 如果需要统一加参数可以options.params.token = 'xxx'
     return new Promise((resolve, reject) => {
       useFetch(url, { ...options, key })
