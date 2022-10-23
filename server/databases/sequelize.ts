@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 16:27:12
+ * @LastEditTime: 2022-10-23 16:37:58
  */
 import { Sequelize, Options, ModelAttributes } from 'sequelize';
 import config from '~~/main_config';
@@ -16,7 +16,7 @@ export const sequelize = new Sequelize(
     dialect: 'mysql',
     port: config.dataBases.port || 3306,
     timezone: config.dataBases.timezone || '+08:00',
-    // logging: () => {},
+    logging: () => {},
     pool: {
       max: 20,
     },
