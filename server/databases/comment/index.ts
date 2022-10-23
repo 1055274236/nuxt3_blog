@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 03:40:22
+ * @LastEditTime: 2022-10-23 16:35:35
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -28,8 +28,8 @@ export const CommentDatabasesOperate = {
     pageSize = pageSize ?? 20;
     offset = offset ?? 0;
     orderBy = orderBy ?? 'createdAt';
-    orderRule = orderRule ?? 'asc';
-    orderRuleArr = orderRuleArr ?? [orderBy, orderRule];
+    orderRule = orderRule ?? 'desc';
+    orderRuleArr = orderRuleArr ?? [[orderBy, orderRule]];
 
     const options: FindAndCountOptions = {
       where: {
@@ -40,10 +40,12 @@ export const CommentDatabasesOperate = {
       },
       offset,
       limit: pageSize,
-      order: [orderRuleArr],
+      order: orderRuleArr,
     };
+
     // 获取根评论
     const rootComment = await CommentContent.findAndCountAll({ ...options });
+
     // 获取评论的回复评论
     let commentList: any = rootComment;
 
@@ -112,6 +114,10 @@ export const CommentDatabasesOperate = {
     };
 
     await CommentContent.create(incParams);
+    root_parent_id &&
+      (await CommentContent.increment('reply', {
+        where: { id: root_parent_id },
+      }));
     return 'success';
   },
 };
