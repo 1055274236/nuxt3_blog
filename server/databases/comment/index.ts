@@ -2,14 +2,15 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 16:35:35
+ * @LastEditTime: 2022-10-24 00:57:19
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
 
-import { CommentTable } from '../table';
+import { CommentTable, BlogTable } from '../table';
 
 const CommentContent = defineConnect(CommentTable.tableName, CommentTable.col);
+const BlogContent = defineConnect(BlogTable.tableName, BlogTable.col);
 CommentContent.belongsTo(CommentContent, {
   as: 'parent',
   targetKey: 'id',
@@ -117,7 +118,8 @@ export const CommentDatabasesOperate = {
     root_parent_id &&
       (await CommentContent.increment('reply', {
         where: { id: root_parent_id },
-      }));
+      })) &&
+      (await BlogContent.increment('comment', { where: { id: blog_id } }));
     return 'success';
   },
 };
