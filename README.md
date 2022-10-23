@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-13 23:55:17
+ * @LastEditTime: 2022-10-24 00:59:58
 -->
 
 # 使用
@@ -24,7 +24,7 @@
 
 # 设置
 
-[数据库结构](./databases.md)
+[数据库结构](./server/databases/table)
 
 <br />
 <br />
