@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 03:38:00
+ * @LastEditTime: 2022-10-24 00:55:45
 -->
 <template>
   <div id="details">
@@ -205,6 +205,7 @@ const data = reactive({
     parent_id: null,
   },
 });
+// 获取信息
 const [details, comment] = await Promise.all([
   blogRequest.getDetails({ id }),
   commentRequest.getByID({ id }),
@@ -222,6 +223,7 @@ const getComment = async () => {
     id,
     offset: (data.pageNo - 1) * data.pageSize,
     pageSize: data.pageSize,
+    key: new Date().getTime(),
   });
   data.commentCount = comment.data.count;
   data.comment = comment.data.rows;
@@ -256,9 +258,12 @@ const submitComment = async () => {
       };
       getComment();
     }
+  } else {
+    addInform({ type: 'error', message: '请填写相关信息', title: '错误' });
   }
 };
-const submit = useThrottleFn(() => submitComment(), 1000);
+
+const submit = throttleFn(() => submitComment(), 5000);
 </script>
 
 <style lang="scss" scoped>

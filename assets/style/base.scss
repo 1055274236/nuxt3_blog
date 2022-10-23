@@ -50,10 +50,12 @@ a {
     margin: 10px;
 
     .inform-header {
+      color: var(--Blog-color-primary);
       font-size: 18px;
       font-weight: 600;
     }
     .inform-content {
+      margin-top: 5px;
     }
   }
 }

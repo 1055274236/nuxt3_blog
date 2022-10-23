@@ -2,10 +2,10 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:37:53
+ * @LastEditTime: 2022-10-24 00:55:01
  */
 interface InformType {
-  type?: ['success', 'info', 'error', 'warning'];
+  type?: 'success' | 'info' | 'error' | 'warning';
   title?: string;
   message?: string;
   time?: number;
@@ -22,11 +22,7 @@ const initBox = () => {
 
 /**
  * @description:
- * @param {} params
- * @param  type
- * @param  title
- * @param  message
- * @param  time
+ * @param { type, title, message, time } params
  * @return {*}
  * @author: Ming
  */
@@ -47,7 +43,7 @@ export const addInform = (params: InformType) => {
   header.setAttribute('class', 'inform-header');
   content.setAttribute('class', 'inform-content');
 
-  header.innerText = params.title ?? '通知';
+  header.innerText = params.title ?? '提示';
   content.innerHTML = params.message ?? '';
 
   // add
