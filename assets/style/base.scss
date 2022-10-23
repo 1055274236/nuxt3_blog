@@ -32,3 +32,44 @@ html {
 a {
   color: var(--Blog-color-word);
 }
+
+#inform-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  z-index: 100;
+  .infom-item {
+    display: flex;
+    flex-direction: column;
+    left: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: var(--Blog-shadow);
+    background-color: #fff;
+    margin: 10px;
+
+    .inform-header {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .inform-content {
+    }
+  }
+}
+@keyframes informEnter {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes informOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
