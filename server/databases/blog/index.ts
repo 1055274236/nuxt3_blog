@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 00:30:52
+ * @LastEditTime: 2022-10-23 16:36:38
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -42,7 +42,7 @@ export const BlogDatabasesOperate = {
     isTitle = isTitle ?? false;
     orderBy = orderBy ?? 'createdAt';
     orderRule = orderRule ?? 'desc';
-    orderRuleArr = orderRuleArr ?? [orderBy, orderRule];
+    orderRuleArr = orderRuleArr ?? [[orderBy, orderRule]];
 
     const condition = {} as any;
 
@@ -61,7 +61,7 @@ export const BlogDatabasesOperate = {
       attributes: { exclude: ['updatedAt', 'content'] },
       offset: offset,
       limit: pageSize,
-      order: [orderRuleArr],
+      order: orderRuleArr,
     };
 
     const { rows, count } = await BlogContent.findAndCountAll({ ...options });
