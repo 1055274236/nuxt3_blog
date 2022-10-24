@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 21:41:39
+ * @LastEditTime: 2022-10-25 00:21:58
  */
 export const throttleFn = (fn: Function, reply: number = 1000) => {
   let time = 0;
@@ -13,7 +13,7 @@ export const throttleFn = (fn: Function, reply: number = 1000) => {
       time = newTime;
       fn();
     } else {
-      addInform({
+      addNotification({
         message: '您的操作过于频繁，请稍后再试！',
         type: 'info',
         title: '提示',

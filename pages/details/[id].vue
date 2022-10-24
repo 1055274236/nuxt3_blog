@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:55:45
+ * @LastEditTime: 2022-10-25 00:44:12
 -->
 <template>
   <div id="details">
@@ -259,11 +259,15 @@ const submitComment = async () => {
       getComment();
     }
   } else {
-    addInform({ type: 'error', message: '请填写相关信息', title: '错误' });
+    addNotification({
+      type: 'error',
+      message: '请填写相关信息',
+      title: '错误',
+    });
   }
 };
 
-const submit = throttleFn(() => submitComment(), 5000);
+const submit = throttleFn(submitComment, 5000);
 </script>
 
 <style lang="scss" scoped>
