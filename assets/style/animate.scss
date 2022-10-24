@@ -29,3 +29,13 @@
   transform: scale(0.5);
   opacity: 0;
 }
+
+.translateX-enter-active,
+.translateX-leave-active {
+  transition: all 0.5s ease;
+}
+
+.translateX-enter-from,
+.translateX-leave-to {
+  transform: translateX(100%);
+}
