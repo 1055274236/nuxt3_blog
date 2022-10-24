@@ -2,10 +2,10 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:54:50
+ * @LastEditTime: 2022-10-24 21:41:39
  */
 export const throttleFn = (fn: Function, reply: number = 1000) => {
-  let time = new Date().getTime();
+  let time = 0;
 
   return () => {
     let newTime = new Date().getTime();
