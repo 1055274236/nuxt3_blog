@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-08-15 00:54:19
+ * @LastEditTime: 2022-10-24 23:54:43
  */
 import Home from './Home/Home.vue';
 import Clock from './Clock/Clock.vue';
@@ -17,6 +17,10 @@ import Pin from './Pin/Pin.vue';
 import Search from './Search/Search.vue';
 import ArrowLeft from './ArrowLeft/ArrowLeft.vue';
 import ArrowRight from './ArrowRight/ArrowRight.vue';
+import Success from './Success/index.vue';
+import Prompt from './Prompt/index.vue';
+import Error from './Error/index.vue';
+import Reduce from './Reduce/index.vue';
 
 export {
   Home,
@@ -32,4 +36,8 @@ export {
   Search,
   ArrowLeft,
   ArrowRight,
+  Success,
+  Prompt,
+  Reduce,
+  Error,
 };
