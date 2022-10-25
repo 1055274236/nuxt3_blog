@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 23:41:32
+ * @LastEditTime: 2022-10-25 21:05:05
  */
 import { BlogDatabasesOperate } from '~~/server/databases';
 import { Response } from '~~/server/utils';
@@ -14,7 +14,10 @@ export default defineEventHandler(async (event) => {
   const listPromise = BlogDatabasesOperate.getList({ pageSize });
   const listByWatchPromist = BlogDatabasesOperate.getList({
     pageSize: 5,
-    orderBy: 'pageview',
+    orderRuleArr: [
+      ['pageview', 'desc'],
+      ['updatedAt', 'desc'],
+    ],
   });
 
   const [list, listByWatch] = await Promise.all([

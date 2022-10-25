@@ -2,10 +2,40 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-17 00:02:55
+ * @LastEditTime: 2022-10-25 22:31:45
 -->
 <template>
   <div id="home">
+    <div class="home-header">
+      <div class="home-stik"></div>
+      <div class="list-by-pageView">
+        <NuxtLink
+          :class="['list-item', { pageViewShow: data.pageViewIndex === index }]"
+          v-for="(item, index) in data.listByPageView"
+          :key="index"
+          :to="`/details/${item.id}`"
+        >
+          <img :src="item.cover" :alt="item.title" class="item-img" />
+          <div class="item-label">{{ item.title }}</div>
+        </NuxtLink>
+        <ul class="choose">
+          <li
+            :class="[
+              'choose-item',
+              { pageViewShow: data.pageViewIndex === index },
+            ]"
+            v-for="(item, index) in data.listByPageView"
+            @mouseenter="
+              () => {
+                data.pageViewIndex = index;
+                removeInterval();
+              }
+            "
+            @mouseleave="addinterval"
+          ></li>
+        </ul>
+      </div>
+    </div>
     <!-- 主页内容 -->
     <div class="home-content">
       <div class="home-content-list">
@@ -58,16 +88,15 @@
 import { useTitle } from '@vueuse/core';
 import { reactive, onMounted } from 'vue';
 import { HomeRequest } from '~~/api';
-// import { lockScrollTo } from '@/utils';
-
-const router = useRouter();
-const route = useRoute();
 
 interface DataType {
   blogList: any[];
   blogCount: number;
   pageNow: number;
   blogPageSize: number;
+
+  listByPageView: any[];
+  pageViewIndex: number;
 }
 
 const data: DataType = reactive({
@@ -75,6 +104,9 @@ const data: DataType = reactive({
   blogCount: 0,
   blogPageSize: 20,
   pageNow: 1,
+
+  listByPageView: [],
+  pageViewIndex: 0,
 });
 
 // 获取首页列表
@@ -83,104 +115,37 @@ const result = (await homeRequest.getList({ pageSize: data.blogPageSize }))
   .data;
 data.blogList = result.list.rows;
 data.blogCount = result.list.count;
+data.listByPageView = result.listByWatch.rows;
 
-// const { x, y } = useWindowScroll();
+let interval = null;
 onMounted(async () => {
   useTitle("Ming' Blog");
+  addinterval();
 });
 
-// const itemClick = (id: string) => {
-//   router.push({ path: `/details/${id}` });
-// };
+const addinterval = () => {
+  interval = setInterval(() => {
+    data.pageViewIndex++;
+    if (data.pageViewIndex >= data.listByPageView.length) {
+      data.pageViewIndex = 0;
+    }
+  }, 5000);
+};
+
+const removeInterval = () => {
+  clearInterval(interval);
+};
+
+onBeforeUnmount(() => {
+  clearInterval(interval);
+});
+
+// 图片加载失败
+const imgLoadError = (item: any) => {
+  item.cover = 'http://static.thisisming.top/static/static/vue.png';
+};
 </script>
 
 <style lang="scss" scoped>
-#home {
-  .home-content {
-    .home-content-list {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      .content-list-item {
-        display: flex;
-        width: 90%;
-        max-width: 1200px;
-        min-width: 300px;
-        padding: 10px 16px;
-        // border: 1px dashed black;
-        border-radius: 20px;
-        background-color: var(--Blog-color-back);
-        transition: all 0.4s ease;
-        margin: 20px 0;
-        cursor: pointer;
-
-        box-shadow: var(--Blog-shadow);
-        // &:nth-child(odd) {
-        //   align-self: flex-start;
-        // }
-        // &:nth-child(even) {
-        //   align-self: flex-end;
-        // }
-        &:hover {
-          width: 92%;
-          box-shadow: 5px 5px 20px 15px #00000020;
-          transform: rotateX(10deg);
-        }
-        .item-left {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          .cover {
-            width: 120px;
-            img {
-              width: 100%;
-            }
-          }
-        }
-        .item-right {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          margin: 0 10px;
-          .title {
-            font-size: 20px;
-            font-weight: 600;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-          }
-          .brief {
-            line-height: 20px;
-            min-height: 60px;
-            text-overflow: -o-ellipsis-lastline;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            user-select: none;
-          }
-          .item-tag {
-            display: flex;
-            // justify-content: center;
-            align-items: center;
-            user-select: none;
-            opacity: 0.5;
-            .tag {
-              padding: 5px 10px;
-              border-radius: 50px;
-              color: black;
-            }
-          }
-          .createdAt {
-            text-align: right;
-            user-select: none;
-            opacity: 0.5;
-          }
-        }
-      }
-    }
-  }
-}
+@use './index.scss';
 </style>
