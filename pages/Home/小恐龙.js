@@ -550,16 +550,22 @@ export default () => {
 
     checkPoint: function () {
       return {
-        x: 600 * 0.3 * (this.currentSpeed / 12),
+        x: 260 * (this.currentSpeed / 16),
         y: 150 * 0.75,
       };
     },
 
     check: function () {
       try {
-        if (this.horizon.obstacles[0].xPos < this.checkPoint().x) {
+        if (this.horizon.obstacles[0].yPos > 60 && !this.tRex.jumping) {
+          if (this.tRex.ducking) this.tRex.setDuck(false);
+        }
+        if (this.horizon.obstacles[0].yPos < 60 && !this.tRex.jumping) {
+          if (!this.tRex.ducking) this.tRex.setDuck(true);
+        } else if (this.horizon.obstacles[0].xPos < this.checkPoint().x) {
           this.tRex.startJump(this.currentSpeed);
         }
+        console.log(this.horizon.obstacles[0].xPos, this.checkPoint().x);
       } catch (e) {}
     },
 
