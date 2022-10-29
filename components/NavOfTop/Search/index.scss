@@ -64,6 +64,7 @@
           padding: 10px;
           .list-item {
             cursor: pointer;
+            transition: all 0.3s ease;
             margin: 10px 0;
             box-shadow: 1px 1px 10px 3px #00000030;
             border-radius: 10px;
