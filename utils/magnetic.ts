@@ -90,15 +90,22 @@ export function loadMagnetic() {
   //初始化画布大小
 
   set_canvas_size(), (window.onresize = set_canvas_size);
-  //当时鼠标位置存储，离开的时候，释放当前位置信息
-  (window.onmousemove = function (e) {
-    (e = e || window.event),
-      (current_point.x = e.clientX),
-      (current_point.y = e.clientY);
-  }),
-    (window.onmouseout = function () {
-      (current_point.x = null), (current_point.y = null);
-    });
+  /** @const */
+  var IS_IOS = /iPad|iPhone|iPod/.test(window.navigator.platform);
+
+  /** @const */
+  var IS_MOBILE = /Android/.test(window.navigator.userAgent) || IS_IOS;
+  if (!IS_IOS && !IS_MOBILE) {
+    //当时鼠标位置存储，离开的时候，释放当前位置信息
+    (window.onmousemove = function (e) {
+      (e = e || window.event),
+        (current_point.x = e.clientX),
+        (current_point.y = e.clientY);
+    }),
+      (window.onmouseout = function () {
+        (current_point.x = null), (current_point.y = null);
+      });
+  }
   //随机生成config.n条线位置信息
   for (var random_lines = [], i = 0; config.n > i; i++) {
     var x = random() * canvas_width, //随机位置
