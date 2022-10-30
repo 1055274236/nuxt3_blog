@@ -341,6 +341,11 @@ export default () => {
       document.querySelector('.' + Runner.classes.ICON).style.visibility =
         'hidden';
 
+      let domArr = document.querySelectorAll('.' + Runner.classes.CONTAINER);
+      if (domArr.length > 0) {
+        domArr[0].outerHTML = '';
+      }
+
       this.adjustDimensions();
       this.setSpeed();
 
@@ -2940,4 +2945,5 @@ export default () => {
       );
     },
   };
+  new Runner('.interstitial-wrapper');
 };

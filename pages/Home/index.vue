@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-29 23:03:23
+ * @LastEditTime: 2022-10-30 18:33:49
 -->
 <template>
   <div id="home">
@@ -41,31 +41,36 @@
         </div>
       </div>
       <div class="list-by-pageView">
-        <NuxtLink
-          :class="['list-item', { pageViewShow: data.pageViewIndex === index }]"
-          v-for="(item, index) in data.listByPageView"
-          :key="index"
-          :to="`/details/${item.id}`"
-        >
-          <img :src="item.cover" :alt="item.title" class="item-img" />
-          <div class="item-label">{{ item.title }}</div>
-        </NuxtLink>
-        <ul class="choose">
-          <li
+        <div class="list-box">
+          <NuxtLink
             :class="[
-              'choose-item',
+              'list-item',
               { pageViewShow: data.pageViewIndex === index },
             ]"
             v-for="(item, index) in data.listByPageView"
-            @mouseenter="
-              () => {
-                data.pageViewIndex = index;
-                removeInterval();
-              }
-            "
-            @mouseleave="addinterval"
-          ></li>
-        </ul>
+            :key="index"
+            :to="`/details/${item.id}`"
+          >
+            <img :src="item.cover" :alt="item.title" class="item-img" />
+            <div class="item-label">{{ item.title }}</div>
+          </NuxtLink>
+          <!-- <ul class="choose">
+            <li
+              :class="[
+                'choose-item',
+                { pageViewShow: data.pageViewIndex === index },
+              ]"
+              v-for="(item, index) in data.listByPageView"
+              @mouseenter="
+                () => {
+                  data.pageViewIndex = index;
+                  removeInterval();
+                }
+              "
+              @mouseleave="addinterval"
+            ></li>
+          </ul> -->
+        </div>
       </div>
     </div>
     <!-- 主页内容 -->
@@ -158,9 +163,8 @@ onMounted(async () => {
 });
 
 const initDragon = () => {
-  Ru();
   nextTick(() => {
-    new Runner('.interstitial-wrapper');
+    Ru();
   });
 };
 
