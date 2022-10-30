@@ -570,7 +570,6 @@ export default () => {
         } else if (this.horizon.obstacles[0].xPos < this.checkPoint().x) {
           this.tRex.startJump(this.currentSpeed);
         }
-        console.log(this.horizon.obstacles[0].xPos, this.checkPoint().x);
       } catch (e) {}
     },
 
