@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-30 18:33:49
+ * @LastEditTime: 2022-10-31 16:42:56
 -->
 <template>
   <div id="home">
@@ -41,36 +41,7 @@
         </div>
       </div>
       <div class="list-by-pageView">
-        <div class="list-box">
-          <NuxtLink
-            :class="[
-              'list-item',
-              { pageViewShow: data.pageViewIndex === index },
-            ]"
-            v-for="(item, index) in data.listByPageView"
-            :key="index"
-            :to="`/details/${item.id}`"
-          >
-            <img :src="item.cover" :alt="item.title" class="item-img" />
-            <div class="item-label">{{ item.title }}</div>
-          </NuxtLink>
-          <!-- <ul class="choose">
-            <li
-              :class="[
-                'choose-item',
-                { pageViewShow: data.pageViewIndex === index },
-              ]"
-              v-for="(item, index) in data.listByPageView"
-              @mouseenter="
-                () => {
-                  data.pageViewIndex = index;
-                  removeInterval();
-                }
-              "
-              @mouseleave="addinterval"
-            ></li>
-          </ul> -->
-        </div>
+        <Carousel :data="data.listByPageView" />
       </div>
     </div>
     <!-- 主页内容 -->
@@ -134,7 +105,6 @@ interface DataType {
   blogPageSize: number;
 
   listByPageView: any[];
-  pageViewIndex: number;
 }
 
 const data: DataType = reactive({
@@ -144,7 +114,6 @@ const data: DataType = reactive({
   pageNow: 1,
 
   listByPageView: [],
-  pageViewIndex: 0,
 });
 
 // 获取首页列表
@@ -155,10 +124,8 @@ data.blogList = result.list.rows;
 data.blogCount = result.list.count;
 data.listByPageView = result.listByWatch.rows;
 
-let interval = null;
 onMounted(async () => {
   useTitle("Ming' Blog");
-  addinterval();
   initDragon();
 });
 
@@ -166,28 +133,6 @@ const initDragon = () => {
   nextTick(() => {
     Ru();
   });
-};
-
-const addinterval = () => {
-  interval = setInterval(() => {
-    data.pageViewIndex++;
-    if (data.pageViewIndex >= data.listByPageView.length) {
-      data.pageViewIndex = 0;
-    }
-  }, 5000);
-};
-
-const removeInterval = () => {
-  clearInterval(interval);
-};
-
-onBeforeUnmount(() => {
-  clearInterval(interval);
-});
-
-// 图片加载失败
-const imgLoadError = (item: any) => {
-  item.cover = 'http://static.thisisming.top/static/static/vue.png';
 };
 </script>
 
