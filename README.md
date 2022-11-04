@@ -2,13 +2,13 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:59:58
+ * @LastEditTime: 2022-11-04 15:10:00
 -->
 
 # 使用
 
 ```
- pnpm i
+ pnpm install --shamefully-hoist
  pnpm run dev
 ```
 
