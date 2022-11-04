@@ -2,13 +2,13 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-10 19:30:31
+ * @LastEditTime: 2022-11-04 21:23:51
  */
-import { defineNuxtConfig } from 'nuxt';
+import { defineNuxtConfig } from 'nuxt/config';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ['@vueuse/nuxt'],
+  modules: ['@pinia/nuxt', '@vueuse/nuxt'],
   vite: {},
   app: {
     head: {

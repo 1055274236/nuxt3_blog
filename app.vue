@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 23:44:34
+ * @LastEditTime: 2022-11-04 21:55:12
 -->
 <template>
   <NavOfTop />
@@ -15,7 +15,19 @@
 <script setup>
 import { loadMagnetic } from '@/utils';
 import { onMounted, nextTick } from 'vue';
-const route = useRoute();
+import { BaseRequest } from '@/api';
+import optionsStore from '@/stores/options';
+
+const baseRequest = new BaseRequest();
+const useOptions = optionsStore();
+
+const initOptions = async () => {
+  const result = await baseRequest.getOptions({ key: 'records,tinykey' });
+  const data = result.data;
+  useOptions.init({ records: data.records.value, tinyKey: data.tinykey.value });
+};
+await initOptions();
+
 onMounted(() => {
   nextTick(async () => {
     if (process.client) {

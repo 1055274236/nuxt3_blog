@@ -16,11 +16,16 @@
     "vue": "^3.2.39"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.3",
+    "@tinymce/tinymce-vue": "4",
     "animate.css": "^4.1.1",
     "mime-types": "^2.1.35",
     "mysql2": "^2.3.3",
     "ohash": "^0.1.5",
+    "pinia": "^2.0.23",
+    "pinia-plugin-persist": "^1.0.0",
     "sequelize": "^6.21.6",
+    "tinymce": "^6.2.0",
     "ua-parser-js": "^1.0.32",
     "xz-ipnet": "^1.0.2"
   },
