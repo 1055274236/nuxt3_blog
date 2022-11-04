@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-16 23:47:44
+ * @LastEditTime: 2022-11-04 21:46:36
 -->
 <template>
   <footer id="footer">
@@ -18,9 +18,11 @@
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue';
+import optionsStore from '@/stores/options';
 import { BaseRequest } from '~~/api';
 
 const baseRequest = new BaseRequest();
+const useOptions = optionsStore();
 
 interface DataType {
   records: string;
@@ -31,7 +33,8 @@ const data: DataType = reactive({
 });
 const getRecords = async () => {
   const result = await baseRequest.getOptions({ key: 'records' });
-  data.records = result.data.options.records.value;
+  data.records = result.data.records.value;
+  data.records = useOptions.records;
 };
 await getRecords();
 
