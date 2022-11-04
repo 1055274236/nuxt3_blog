@@ -2,13 +2,17 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-04 21:56:50
+ * @LastEditTime: 2022-11-05 00:25:08
 -->
 <template>
   <div class="richtextedit">
     <div class="richtextedit-box">
       <div class="richtextedit-content" ref="richtextedit">
-        <Editor :init="options" v-model="value" />
+        <Editor
+          :init="options"
+          v-model="value"
+          :api-key="useOptions.tinyKey || ''"
+        />
       </div>
     </div>
   </div>
@@ -30,7 +34,6 @@ const value = ref('');
 const richtextedit = ref(null) as Ref<HTMLElement>;
 
 const options = {
-  key: useOptions.tinyKey,
   height: 500,
   plugins: [
     'advlist',
