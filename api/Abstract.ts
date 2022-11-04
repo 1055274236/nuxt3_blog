@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 16:15:23
+ * @LastEditTime: 2022-11-04 17:46:29
  */
 
 import { UseFetchOptions } from '#app';
@@ -47,7 +47,7 @@ class Abstract {
             throw createError({
               statusCode: 500,
               statusMessage: url,
-              message: 'Error',
+              message: 'Server Error!No message!',
             });
           } else {
             resolve(value);
