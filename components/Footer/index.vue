@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-04 21:46:36
+ * @LastEditTime: 2022-11-05 02:43:37
 -->
 <template>
   <footer id="footer">
@@ -32,8 +32,6 @@ const data: DataType = reactive({
   records: '',
 });
 const getRecords = async () => {
-  const result = await baseRequest.getOptions({ key: 'records' });
-  data.records = result.data.records.value;
   data.records = useOptions.records;
 };
 await getRecords();
