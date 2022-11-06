@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-15 22:43:59
+ * @LastEditTime: 2022-11-07 00:10:32
 -->
 <template>
   <Teleport to="body">
@@ -55,10 +55,12 @@ const backClick = () => {
 
 <style lang="scss" scoped>
 .baseshade-back {
+  z-index: 999;
   position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: 300;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   pointer-events: auto;
   background-color: #ffffff80;
   // background-color: #00000080;
