@@ -2,8 +2,9 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:55:01
+ * @LastEditTime: 2022-11-06 22:28:58
  */
+// 暂时弃用
 interface InformType {
   type?: 'success' | 'info' | 'error' | 'warning';
   title?: string;
