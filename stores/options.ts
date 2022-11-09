@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-04 20:22:02
+ * @LastEditTime: 2022-11-10 00:53:14
  */
 import { defineStore } from 'pinia';
 
@@ -10,19 +10,19 @@ export default defineStore('options', {
   state: () => {
     return {
       records: '',
-      tinyKey: '',
+      uploadUrl: '',
     };
   },
   actions: {
     init(params: any) {
       this.setRecords(params?.records);
-      this.setTinykey(params?.tinyKey);
+      this.setUploadUrl(params?.uploadUrl);
     },
     setRecords(params: string) {
       this.records = params;
     },
-    setTinykey(params: string) {
-      this.tinyKey = params;
+    setUploadUrl(params: string) {
+      this.uploadUrl = params;
     },
   },
 });
