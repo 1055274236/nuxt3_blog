@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-05 00:25:08
+ * @LastEditTime: 2022-11-10 00:40:26
 -->
 <template>
   <div class="richtextedit">
@@ -10,8 +10,8 @@
       <div class="richtextedit-content" ref="richtextedit">
         <Editor
           :init="options"
-          v-model="value"
-          :api-key="useOptions.tinyKey || ''"
+          v-model="model"
+          :tinymceScriptSrc="options.tinymceScriptSrc"
         />
       </div>
     </div>
@@ -19,21 +19,18 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted, Ref } from 'vue';
-import optionsStore from '@/stores/options';
+import type { Ref } from 'vue';
 import Editor from '@tinymce/tinymce-vue';
 
 const props = defineProps(['modelValue']);
 const emits = defineEmits(['update:modelValue', 'change']);
-const useOptions = optionsStore();
 
-interface DataType {}
-
-const data: DataType = reactive({});
-const value = ref('');
-const richtextedit = ref(null) as Ref<HTMLElement>;
+const richtextedit: Ref<HTMLElement> = ref(null);
 
 const options = {
+  language_url: '/tiny/language/zh-Hans.js',
+  language: 'zh-Hans',
+  tinymceScriptSrc: '/tiny/js/tinymce.min.js',
   height: 500,
   plugins: [
     'advlist',
@@ -63,18 +60,14 @@ const options = {
     'removeformat | codesample link image | code help',
 };
 
-onMounted(() => {});
-
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    if (props.modelValue !== newValue) value.value = props.modelValue;
-  }
-);
-
-watch(value, (newValue, oldValue) => {
-  emits('change', newValue, oldValue);
-  emits('update:modelValue', newValue);
+const model = computed({
+  get: () => {
+    return props.modelValue;
+  },
+  set: (newValue) => {
+    emits('change', newValue, props.modelValue);
+    emits('update:modelValue', newValue);
+  },
 });
 </script>
 
