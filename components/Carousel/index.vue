@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-31 16:38:36
+ * @LastEditTime: 2022-11-07 22:45:38
 -->
 <template>
   <div
@@ -29,8 +29,8 @@
         </TransitionGroup>
       </div>
 
-      <div class="left button" @click="moveChoose(data.chooseIndex - 1)"></div>
-      <div class="right button" @click="moveChoose(data.chooseIndex + 1)"></div>
+      <div class="left button" @click="chooseClick(-1)"></div>
+      <div class="right button" @click="chooseClick(1)"></div>
     </div>
   </div>
 </template>
@@ -86,6 +86,11 @@ const mouseLeave = () => {
   if (boxInterval.value) clearInterval(boxInterval.value);
   runInterval();
 };
+
+const chooseClick = useThrottleFn(
+  (offect: number) => moveChoose(data.chooseIndex + offect),
+  1000
+);
 
 const moveChoose = (index?) => {
   index = index ?? data.chooseIndex + 1;
