@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-04 21:23:51
+ * @LastEditTime: 2022-11-07 23:38:18
  */
 import { defineNuxtConfig } from 'nuxt/config';
 
@@ -16,5 +16,5 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'zh_CN' },
     },
   },
-  css: ['animate.css/animate.css'],
+  css: ['animate.css/animate.css', '~/assets/style/element-plus.scss'],
 });
