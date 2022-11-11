@@ -1,3 +1,9 @@
+/*
+ * @Description:
+ * @Autor: Ming
+ * @LastEditors: Ming
+ * @LastEditTime: 2022-11-12 01:12:54
+ */
 import { createVNode, render, isVNode, createElementVNode } from 'vue';
 import { NotificationOptions } from './type';
 import Main from './main.vue';
@@ -5,6 +11,15 @@ import Main from './main.vue';
 const mountNodeQueue = [] as HTMLDivElement[];
 let zIndex = 2000;
 
+/**
+ * @description: 添加消息弹窗
+ * @param {string | VNode | HTMLElement} message
+ * @param {'success' | 'info' | 'warning' | 'error'} type
+ * @param {string} title
+ * @param {number} duration
+ * @param {number} top
+ * @author: Ming
+ */
 export const Notification = (options: NotificationOptions) => {
   if (!process.client) return;
 
