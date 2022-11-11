@@ -2,7 +2,7 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-24 00:57:19
+ * @LastEditTime: 2022-11-11 22:41:42
  */
 import { FindAndCountOptions, Op } from 'sequelize';
 import { defineConnect } from '../sequelize';
@@ -115,11 +115,14 @@ export const CommentDatabasesOperate = {
     };
 
     await CommentContent.create(incParams);
-    root_parent_id &&
-      (await CommentContent.increment('reply', {
+    // 对具有根节点的评论增加回复数，无根节点的便添加至博客评论数
+    if (root_parent_id) {
+      await CommentContent.increment('reply', {
         where: { id: root_parent_id },
-      })) &&
-      (await BlogContent.increment('comment', { where: { id: blog_id } }));
+      });
+    } else {
+      await BlogContent.increment('comment', { where: { id: blog_id } });
+    }
     return 'success';
   },
 };
