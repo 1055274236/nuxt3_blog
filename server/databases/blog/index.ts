@@ -2,9 +2,9 @@
  * @Description:
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-10-23 16:36:38
+ * @LastEditTime: 2022-11-13 00:59:41
  */
-import { FindAndCountOptions, Op } from 'sequelize';
+import { FindAndCountOptions, Op, FindOptions, UpdateOptions } from 'sequelize';
 import { defineConnect } from '../sequelize';
 
 import { BlogTable } from '../table';
@@ -57,7 +57,7 @@ export const BlogDatabasesOperate = {
     }
 
     const options: FindAndCountOptions<any> = {
-      where: { [Op.or]: condition },
+      where: { [Op.or]: condition, isShow: true },
       attributes: { exclude: ['updatedAt', 'content'] },
       offset: offset,
       limit: pageSize,
@@ -77,12 +77,63 @@ export const BlogDatabasesOperate = {
    */
   async getDetails(params) {
     const { id } = params;
-    const options: FindAndCountOptions<any> = {
+    const options: FindOptions<any> = {
       where: { id },
     };
 
     const details = await BlogContent.findOne({ ...options });
 
     return { details };
+  },
+
+  /**
+   * @description: 添加浏览量
+   * @author: Ming
+   */
+  async increasePageView(params) {
+    const { id } = params;
+    BlogContent.increment('pageview', { where: { id } });
+    return 'Success';
+  },
+
+  /**
+   * @description: 更改博客数据
+   * @author: Ming
+   */
+  async updateBlog(params) {
+    const { id, cover, title, content, tag, brief, file } = params;
+    const options: UpdateOptions<any> = {
+      where: { id },
+    };
+    const value = { cover, title, content, tag, brief, file };
+
+    await BlogContent.update(value, options);
+    return 'Success';
+  },
+
+  /**
+   * @description: 创建博客
+   * @author: Ming
+   */
+  async createBlog(params) {
+    const { cover, title, content, tag, brief, file } = params;
+    const value = { cover, title, content, tag, brief, file };
+
+    await BlogContent.create(value);
+    return 'Success';
+  },
+
+  /**
+   * @description: 修改 isShow 以达到删除
+   * @author: Ming
+   */
+  async changeBlogIsShow(params, isShow: boolean = false) {
+    const { id } = params;
+    const promiseArr: Promise<any>[] = [];
+    for (let i of id.split(',')) {
+      promiseArr.push(BlogContent.update({ isShow }, { where: { id: i } }));
+    }
+    await Promise.all(promiseArr);
+    return 'Success';
   },
 };
