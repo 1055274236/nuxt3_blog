@@ -2,7 +2,7 @@
  * @Description: 
  * @Autor: Ming
  * @LastEditors: Ming
- * @LastEditTime: 2022-11-04 21:55:12
+ * @LastEditTime: 2022-11-10 00:43:04
 -->
 <template>
   <NavOfTop />
@@ -22,9 +22,14 @@ const baseRequest = new BaseRequest();
 const useOptions = optionsStore();
 
 const initOptions = async () => {
-  const result = await baseRequest.getOptions({ key: 'records,tinykey' });
+  const result = await baseRequest.getOptions({
+    key: 'records,uploadurl',
+  });
   const data = result.data;
-  useOptions.init({ records: data.records.value, tinyKey: data.tinykey.value });
+  useOptions.init({
+    records: data.records.value,
+    uploadUrl: data.uploadurl.value,
+  });
 };
 await initOptions();
 
